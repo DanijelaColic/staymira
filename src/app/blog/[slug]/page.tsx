@@ -7,6 +7,7 @@ import FloatingUI from '@/components/FloatingUI';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { hasBlogContent, getBlogContent, extractToc } from '@/lib/blog';
+import { BlogPostingJsonLd } from '@/components/JsonLd';
 import { posts } from '../page';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -63,6 +64,13 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <BlogPostingJsonLd
+        slug={slug}
+        title={post.title}
+        excerpt={post.excerpt}
+        author={post.author}
+        datePublished={post.date}
+      />
       <ReadingProgress />
       <Header />
       <main>

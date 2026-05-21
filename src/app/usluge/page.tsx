@@ -4,6 +4,16 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
+import { FaqJsonLd } from '@/components/JsonLd';
+
+const uslugestFaq = [
+  { q: 'Mogu li koristiti samo neke usluge, a ne sve?', a: 'Da, možemo prilagoditi suradnju vašim potrebama. Neki vlasnici žele samo upravljanje cijenama i oglasima, dok drugi prepuštaju sve. Kontaktirajte nas i zajedno dogovorimo što ima smisla za vaš smještaj.' },
+  { q: 'Koliko košta upravljanje smještajem?', a: 'Naknada se kreće između 18% i 26% prihoda od rezervacija, ovisno o paketu i tipu smještaja. Nema fiksnih troškova ni skrivenih naknada — zarađujemo samo kad zarađujete vi.' },
+  { q: 'Što ako već imam oglase na Booking.com i Airbnbu?', a: 'Bez problema — optimiziramo vaše postojeće oglase ili otvaramo nove pod vašim računom, ovisno o dogovoru. Sinkroniziramo kalendare i preuzimamo komunikaciju.' },
+  { q: 'Koliko brzo mogu početi?', a: 'Nakon dogovora, potrebno je 3–7 dana za postavljanje svega: fotografije, opisi, kanali, cijene. Obično primamo prve rezervacije unutar prvog tjedna aktivacije.' },
+  { q: 'Kada i kako dobivam isplatu?', a: 'Isplata dolazi jednom ili dva puta mjesečno, s detaljnim izvještajem svih rezervacija, prihoda i naknada. Puna transparentnost — uvijek znate koji novac i za koje noći.' },
+  { q: 'Radite li samo za Osijek?', a: 'Ne — radimo za smještaje diljem Hrvatske. Za Osijek imamo vlastiti tim za čišćenje. Za ostatak HR koordiniramo lokalne provjeren partnere za čišćenje, a upravljanje, oglašavanje i cijene vodimo centralno.' },
+];
 
 export const metadata: Metadata = {
   title: 'Usluge – StayMira | Profesionalno upravljanje smještajem',
@@ -157,6 +167,7 @@ const services: Service[] = [
 export default function UslugePage() {
   return (
     <>
+      <FaqJsonLd items={uslugestFaq} />
       <Header />
       <main>
         {/* Hero */}

@@ -1,23 +1,4 @@
-type Destination = {
-  name: string;
-  region: string;
-  emoji: string;
-  popular?: boolean;
-  // fullService = true → property management + čišćenje direktno
-  // fullService = false/undefined → property management + partnersko čišćenje
-  fullService?: boolean;
-};
-
-const destinations: Destination[] = [
-  { name: 'Osijek', region: 'Slavonija', emoji: '🌻', fullService: true },
-  { name: 'Split', region: 'Dalmacija', emoji: '⚓', popular: true },
-  { name: 'Zadar', region: 'Dalmacija', emoji: '🌅' },
-  { name: 'Dubrovnik', region: 'Dalmacija', emoji: '🏰' },
-  { name: 'Istra', region: 'Istra i Kvarner', emoji: '🫒', popular: true },
-  { name: 'Kvarner', region: 'Istra i Kvarner', emoji: '⛵' },
-  { name: 'Plitvička jezera', region: 'Kontinentalna Hrvatska', emoji: '🏞️' },
-  { name: 'Zagreb', region: 'Kontinentalna Hrvatska', emoji: '🏙️' },
-];
+import { destinations } from '@/lib/destinations';
 
 export default function Destinations() {
   return (
@@ -84,14 +65,15 @@ export default function Destinations() {
 
             <div className="grid grid-cols-2 gap-3">
               {destinations.map((dest) => (
-                <div
-                  key={dest.name}
-                  className={`relative flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 cursor-default ${
+                <a
+                  key={dest.slug}
+                  href={`/destinacije/${dest.slug}`}
+                  className={`relative flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
                     dest.fullService
                       ? 'bg-[#0f2742] border-[#0f2742] text-white shadow-md ring-2 ring-[#c9a86a]/40'
                       : dest.popular
                         ? 'bg-[#0f2742]/90 border-[#0f2742] text-white shadow-md'
-                        : 'bg-white border-[#e8dcc8] text-[#0f2742] hover:border-[#c9a86a]/40 hover:shadow-sm'
+                        : 'bg-white border-[#e8dcc8] text-[#0f2742] hover:border-[#c9a86a]/40'
                   }`}
                 >
                   {/* Badge: Puni servis ili Top */}
@@ -122,7 +104,7 @@ export default function Destinations() {
                       {dest.fullService ? 'Upravljanje + čišćenje' : 'Property management'}
                     </p>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>

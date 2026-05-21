@@ -79,6 +79,39 @@ export const posts = [
     date: '15. ožujka 2026.',
     author: 'StayMira tim',
   },
+  {
+    slug: 'check-in-iskustvo-gostiju',
+    tag: 'Gosti',
+    readTime: '5 min',
+    title: 'Check-in iskustvo koje donosi 5 zvjezdica — korak po korak',
+    excerpt:
+      'Prve 30 minuta boravka određuju kakvu ocjenu ćete dobiti. Evo kako postaviti check-in proces koji oduševljava goste i smanjuje vaše intervencije na minimum.',
+    emoji: '🗝️',
+    date: '5. svibnja 2026.',
+    author: 'StayMira tim',
+  },
+  {
+    slug: 'vrbo-expedia-alternativne-platforme',
+    tag: 'Platforme',
+    readTime: '6 min',
+    title: 'Vrbo, Expedia i direktne rezervacije: diversifikacija kanala za veći prihod',
+    excerpt:
+      'Osloniti se samo na Booking i Airbnb je rizik. Saznajte koje alternativne platforme donose različite profile gostiju i kako direktne rezervacije eliminiraju provizije.',
+    emoji: '🌐',
+    date: '28. travnja 2026.',
+    author: 'StayMira tim',
+  },
+  {
+    slug: 'priprema-smjestaja-za-sezonu',
+    tag: 'Savjeti',
+    readTime: '7 min',
+    title: 'Kompletna priprema smještaja za sezonu: checklista za vlasnike',
+    excerpt:
+      'Vlasnici koji se ozbiljno pripreme za sezonu ostvaruju 20–30% bolje ocjene. Kompletna checklista: popravci, tekstil, digitalni profili, logistika i vremenski plan.',
+    emoji: '📋',
+    date: '20. travnja 2026.',
+    author: 'StayMira tim',
+  },
 ];
 
 export default function BlogPage() {

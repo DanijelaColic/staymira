@@ -76,6 +76,78 @@ const websiteSchema = {
   },
 };
 
+// ── BlogPosting schema for individual blog posts ──────────────────────────
+type BlogPostingProps = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  author: string;
+  datePublished: string;
+};
+
+export function BlogPostingJsonLd({ slug, title, excerpt, author, datePublished }: BlogPostingProps) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: excerpt,
+    url: `https://staymira.hr/blog/${slug}`,
+    author: {
+      '@type': 'Organization',
+      name: author,
+      url: 'https://staymira.hr',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'StayMira',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://staymira.hr/og-image.png',
+      },
+    },
+    datePublished,
+    dateModified: datePublished,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://staymira.hr/blog/${slug}`,
+    },
+    inLanguage: 'hr',
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// ── FAQPage schema for pages with FAQ sections ─────────────────────────────
+type FaqItem = { q: string; a: string };
+
+export function FaqJsonLd({ items }: { items: FaqItem[] }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: a,
+      },
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// ── LocalBusiness JSON-LD (default export) ─────────────────────────────────
 export default function JsonLd() {
   return (
     <>
