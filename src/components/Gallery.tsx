@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 type Property = {
   id: number;
@@ -11,10 +12,12 @@ type Property = {
   rating: number;
   occupancy: number;
   revenueBoost: string;
-  emoji: string;
+  // Unsplash photo ID for placeholder; replace with real photos in production
+  photoId: string;
   tags: string[];
 };
 
+// All photos from Unsplash — free to use. Replace with actual property photos in production.
 const properties: Property[] = [
   {
     id: 1,
@@ -25,7 +28,7 @@ const properties: Property[] = [
     rating: 4.97,
     occupancy: 91,
     revenueBoost: '+52%',
-    emoji: '🏊',
+    photoId: 'photo-1564013799919-ab600027ffc6', // Pool villa
     tags: ['Bazen', 'Pogled na more', 'Vila'],
   },
   {
@@ -37,7 +40,7 @@ const properties: Property[] = [
     rating: 4.92,
     occupancy: 88,
     revenueBoost: '+38%',
-    emoji: '🏛️',
+    photoId: 'photo-1502672260266-1c1ef2d93688', // Modern apartment
     tags: ['Centar', 'Pogled na more', 'Apartman'],
   },
   {
@@ -49,7 +52,7 @@ const properties: Property[] = [
     rating: 4.95,
     occupancy: 85,
     revenueBoost: '+44%',
-    emoji: '🫒',
+    photoId: 'photo-1570129477492-45c003edd2be', // Country house
     tags: ['Privatnost', 'Vrt', 'Kuća'],
   },
   {
@@ -61,7 +64,7 @@ const properties: Property[] = [
     rating: 4.98,
     occupancy: 94,
     revenueBoost: '+61%',
-    emoji: '🏰',
+    photoId: 'photo-1512917774080-9991f1c4c750', // Luxury apartment exterior
     tags: ['Stari grad', 'Premium', 'Apartman'],
   },
   {
@@ -73,7 +76,7 @@ const properties: Property[] = [
     rating: 4.93,
     occupancy: 82,
     revenueBoost: '+47%',
-    emoji: '⛵',
+    photoId: 'photo-1613490493576-7fde63acd811', // Pool villa sea view
     tags: ['Bazen', 'Jacuzzi', 'Vila'],
   },
   {
@@ -85,7 +88,7 @@ const properties: Property[] = [
     rating: 4.88,
     occupancy: 79,
     revenueBoost: '+35%',
-    emoji: '🌻',
+    photoId: 'photo-1600585154340-be6161a56a0c', // Nice house with garden
     tags: ['Puni servis', 'Vrt', 'Kuća'],
   },
 ];
@@ -144,17 +147,21 @@ export default function Gallery() {
               key={p.id}
               className="group bg-white rounded-2xl border border-[#e8dcc8] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
-              {/* Image placeholder */}
-              <div className="h-48 bg-gradient-to-br from-[#0f2742] to-[#1a3a5c] relative flex items-center justify-center overflow-hidden">
-                <span className="text-6xl opacity-40">{p.emoji}</span>
+              {/* Property photo */}
+              <div className="h-48 relative overflow-hidden bg-[#0f2742]">
+                <Image
+                  src={`https://images.unsplash.com/${p.photoId}?auto=format&fit=crop&w=600&q=75`}
+                  alt={`${p.name} - ${p.location}`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 {/* Revenue boost badge */}
-                <div className="absolute top-3 right-3 bg-[#c9a86a] text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                <div className="absolute top-3 right-3 bg-[#c9a86a] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
                   {p.revenueBoost} prihoda
                 </div>
-                {/* Placeholder label */}
-                <p className="absolute bottom-3 left-3 text-[#e8dcc8]/40 text-[10px]">
-                  Zamijenite s pravom fotografijom
-                </p>
               </div>
 
               {/* Content */}
@@ -190,8 +197,7 @@ export default function Gallery() {
 
         {/* Bottom note */}
         <p className="text-center text-sm text-[#0f2742]/40 mt-10">
-          Prikazani podaci su primjeri rezultata upravljanja.
-          Fotografije zamijenite s pravim slikama vaših objekata.
+          Prikazani podaci su primjeri rezultata upravljanja StayMira tima.
         </p>
       </div>
     </section>

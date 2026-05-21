@@ -1,24 +1,24 @@
 const footerLinks = {
   Usluge: [
-    { label: 'Upravljanje apartmanima', href: '/#usluge' },
-    { label: 'Upravljanje vilama', href: '/#usluge' },
-    { label: 'Upravljanje kućama za odmor', href: '/#usluge' },
-    { label: 'Optimizacija prihoda', href: '/#usluge' },
-    { label: 'Web stranica za rezervacije', href: '/#usluge' },
+    { label: 'Sve usluge', href: '/usluge' },
+    { label: 'Višekanalno oglašavanje', href: '/usluge#oglasavanje' },
+    { label: 'Dinamično upravljanje cijenama', href: '/usluge#cijene' },
+    { label: 'Web stranica za rezervacije', href: '/usluge#web' },
+    { label: 'Čišćenje i održavanje', href: '/usluge#ciscenje' },
   ],
   Tvrtka: [
     { label: 'O nama', href: '/o-nama' },
-    { label: 'Kako radimo', href: '/#kako-radimo' },
-    { label: 'Paketi i cijene', href: '/#paketi' },
-    { label: 'Destinacije', href: '/#destinacije' },
+    { label: 'Paketi i cijene', href: '/paketi' },
+    { label: 'Destinacije', href: '/destinacije' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Kontakt', href: '/kontakt' },
   ],
   Podrška: [
-    { label: 'Kontakt', href: '/kontakt' },
     { label: 'Besplatna analiza', href: '/#analiza' },
     { label: 'Česta pitanja', href: '/#faq' },
-    { label: 'Uvjeti poslovanja', href: '#' },
     { label: 'Politika privatnosti', href: '/privatnost' },
+    { label: 'Osijek (puni servis)', href: '/destinacije/osijek' },
+    { label: 'Split', href: '/destinacije/split' },
   ],
 };
 
