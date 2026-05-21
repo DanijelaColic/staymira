@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 
 const navLinks = [
-  { label: 'Usluge', href: '#usluge' },
-  { label: 'Kako radimo', href: '#kako-radimo' },
-  { label: 'Zašto mi', href: '#zasto-mi' },
-  { label: 'Destinacije', href: '#destinacije' },
+  { label: 'Usluge', href: '/usluge' },
+  { label: 'Kako radimo', href: '/#kako-radimo' },
+  { label: 'Zašto mi', href: '/#zasto-mi' },
+  { label: 'Destinacije', href: '/#destinacije' },
   { label: 'Blog', href: '/blog' },
   { label: 'Kontakt', href: '/kontakt' },
 ];
@@ -22,9 +22,12 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Scroll spy — tracks which nav section is currently visible
+  // Scroll spy — only track hash-based links (sections on homepage)
   useEffect(() => {
-    const sectionIds = navLinks.map((l) => l.href.replace('#', ''));
+    const hashLinks = navLinks.filter((l) => l.href.includes('#'));
+    const sectionIds = hashLinks.map((l) => l.href.split('#')[1]).filter(Boolean);
+
+    if (sectionIds.length === 0) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -85,7 +88,8 @@ export default function Header() {
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href.replace('#', '');
+              const sectionId = link.href.includes('#') ? link.href.split('#')[1] : null;
+              const isActive = sectionId ? activeSection === sectionId : false;
               return (
                 <a
                   key={link.href}

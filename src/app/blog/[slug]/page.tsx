@@ -6,17 +6,10 @@ import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { hasBlogContent } from '@/lib/blog';
+import { hasBlogContent, getBlogContent, extractToc } from '@/lib/blog';
 import { posts } from '../page';
 
 type Props = { params: Promise<{ slug: string }> };
-
-// Table of contents — static per post (extend when using MDX)
-const tocItems = [
-  { id: 'uvod', label: 'Uvod' },
-  { id: 'zasto-vazno', label: 'Zašto je ovo važno?' },
-  { id: 'preporuke', label: 'Ključne preporuke' },
-];
 
 export async function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -44,6 +37,10 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = posts.find((p) => p.slug === slug);
   if (!post) notFound();
+
+  // Extract TOC from MDX content
+  const rawContent = getBlogContent(slug);
+  const tocItems = rawContent ? extractToc(rawContent) : [];
 
   // Related posts = same tag, exclude current
   // Dynamically import MDX content if available
@@ -143,17 +140,27 @@ export default async function BlogPostPage({ params }: Props) {
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#0f2742]/40">
                   Sadržaj
                 </p>
-                <nav className="flex flex-col gap-1">
-                  {tocItems.map((item) => (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      className="text-sm text-[#0f2742]/60 hover:text-[#c9a86a] hover:pl-2 transition-all duration-200 py-1 border-l-2 border-[#e8dcc8] hover:border-[#c9a86a] pl-3"
-                    >
-                      {item.label}
+                {tocItems.length > 0 ? (
+                  <nav className="flex flex-col gap-0.5">
+                    {tocItems.map((item) => (
+                      <a
+                        key={item.id}
+                        href={`#${item.id}`}
+                        className={`text-sm text-[#0f2742]/60 hover:text-[#c9a86a] transition-all duration-200 py-1 border-l-2 border-[#e8dcc8] hover:border-[#c9a86a] ${
+                          item.level === 2 ? 'pl-3 font-medium' : 'pl-5 text-xs text-[#0f2742]/45'
+                        }`}
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </nav>
+                ) : (
+                  <nav className="flex flex-col gap-1">
+                    <a href="#" className="text-sm text-[#0f2742]/60 hover:text-[#c9a86a] py-1 border-l-2 border-[#e8dcc8] hover:border-[#c9a86a] pl-3">
+                      Uvod
                     </a>
-                  ))}
-                </nav>
+                  </nav>
+                )}
 
                 {/* Share */}
                 <div className="mt-4 pt-4 border-t border-[#e8dcc8]">

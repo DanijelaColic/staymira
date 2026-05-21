@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 type FormState = {
   name: string;
@@ -44,6 +45,7 @@ const CITY_OPTIONS = [
 ];
 
 export default function LeadForm() {
+  const router = useRouter();
   const [form, setForm] = useState<FormState>(initialState);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -69,6 +71,7 @@ export default function LeadForm() {
       });
       if (!res.ok) throw new Error('server error');
       setSubmitted(true);
+      router.push('/hvala');
     } catch {
       alert('Došlo je do greške. Molimo pokušajte ponovo ili nas kontaktirajte direktno.');
     } finally {

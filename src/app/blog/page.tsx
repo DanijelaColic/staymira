@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
+import BlogFilter from '@/components/BlogFilter';
 
 export const metadata: Metadata = {
   title: 'Blog – StayMira | Savjeti za vlasnike smještaja',
@@ -107,46 +108,11 @@ export default function BlogPage() {
           </div>
         </section>
 
-        {/* Posts grid */}
+        {/* Posts grid with tag filter */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {posts.map((post) => (
-                  <a
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    className="group flex flex-col rounded-2xl border border-[#e8dcc8] overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-                  >
-                    <div className="h-44 bg-gradient-to-br from-[#0f2742] to-[#1a3a5c] flex items-center justify-center">
-                      <span className="text-5xl opacity-60">{post.emoji}</span>
-                    </div>
-                    <div className="flex flex-col flex-1 gap-3 p-6">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-semibold text-[#c9a86a] bg-[#c9a86a]/10 px-2.5 py-1 rounded-full">
-                          {post.tag}
-                        </span>
-                        <span className="text-xs text-[#0f2742]/40">{post.readTime} čitanja</span>
-                      </div>
-                      <h2 className="font-bold text-[#0f2742] text-base leading-snug group-hover:text-[#c9a86a] transition-colors">
-                        {post.title}
-                      </h2>
-                      <p className="text-[#0f2742]/55 text-sm leading-relaxed line-clamp-3 flex-1">
-                        {post.excerpt}
-                      </p>
-                      <div className="flex items-center justify-between pt-3 border-t border-[#e8dcc8] mt-auto">
-                        <span className="text-xs text-[#0f2742]/40">{post.date}</span>
-                        <span className="inline-flex items-center gap-1 text-xs font-medium text-[#0f2742] group-hover:text-[#c9a86a] transition-colors">
-                          Pročitaj
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                  </a>
-                ))}
-              </div>
+              <BlogFilter posts={posts} />
             </FadeIn>
           </div>
         </section>
