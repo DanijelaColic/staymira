@@ -4,9 +4,18 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
+import ReadingProgress from '@/components/ReadingProgress';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { posts } from '../page';
 
 type Props = { params: Promise<{ slug: string }> };
+
+// Table of contents — static per post (extend when using MDX)
+const tocItems = [
+  { id: 'uvod', label: 'Uvod' },
+  { id: 'zasto-vazno', label: 'Zašto je ovo važno?' },
+  { id: 'preporuke', label: 'Ključne preporuke' },
+];
 
 export async function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -19,6 +28,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} – StayMira Blog`,
     description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      publishedTime: post.date,
+      authors: [post.author],
+      tags: [post.tag],
+    },
   };
 }
 
@@ -27,14 +44,34 @@ export default async function BlogPostPage({ params }: Props) {
   const post = posts.find((p) => p.slug === slug);
   if (!post) notFound();
 
+  // Related posts = same tag, exclude current
+  const related = posts.filter((p) => p.slug !== slug && p.tag === post.tag).slice(0, 3);
+  // Fill with other posts if not enough
+  if (related.length < 2) {
+    const others = posts.filter((p) => p.slug !== slug && !related.includes(p));
+    related.push(...others.slice(0, 2 - related.length));
+  }
+
   return (
     <>
+      <ReadingProgress />
       <Header />
       <main>
         {/* Article hero */}
         <section className="pt-32 pb-12 bg-[#0f2742]">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
+              {/* Breadcrumbs */}
+              <div className="mb-5">
+                <Breadcrumbs
+                  crumbs={[
+                    { label: 'Početna', href: '/' },
+                    { label: 'Blog', href: '/blog' },
+                    { label: post.title },
+                  ]}
+                />
+              </div>
+
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-xs font-semibold text-[#c9a86a] bg-[#c9a86a]/15 border border-[#c9a86a]/30 px-3 py-1 rounded-full">
                   {post.tag}
@@ -58,51 +95,137 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Article body */}
-        <article className="py-12 bg-white">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Cover emoji */}
-            <div className="h-52 bg-gradient-to-br from-[#0f2742] to-[#1a3a5c] rounded-2xl flex items-center justify-center mb-10">
-              <span className="text-7xl opacity-60">{post.emoji}</span>
-            </div>
-
-            {/* Placeholder article content */}
-            <FadeIn>
-              <div className="prose prose-lg max-w-none text-[#0f2742]/75 leading-relaxed">
-                <p className="text-xl font-medium text-[#0f2742] leading-relaxed mb-6">
-                  {post.excerpt}
-                </p>
-
-                <div className="bg-[#f4efe6] border border-[#e8dcc8] rounded-xl p-5 mb-8 text-sm">
-                  <p className="text-[#0f2742]/60 italic">
-                    📝 <strong>Napomena:</strong> Ovo je placeholder za pravi sadržaj članka.
-                    Zamijenite ovaj blok s pravim tekstom ili integrirajte MDX/CMS sustav za
-                    upravljanje sadržajem.
-                  </p>
+        {/* Article body + TOC sidebar */}
+        <div className="bg-white py-12">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex gap-12 items-start">
+              {/* Main content */}
+              <article className="flex-1 min-w-0">
+                {/* Cover */}
+                <div className="h-52 bg-gradient-to-br from-[#0f2742] to-[#1a3a5c] rounded-2xl flex items-center justify-center mb-10">
+                  <span className="text-7xl opacity-60">{post.emoji}</span>
                 </div>
 
-                <h2 className="text-2xl font-bold text-[#0f2742] mt-8 mb-4">Zašto je ovo važno?</h2>
-                <p>
-                  Kratkoročni najam u Hrvatskoj nastavlja rasti, a vlasnici koji se prilagode
-                  modernim standardima upravljanja bilježe značajno bolje rezultate od onih koji se
-                  oslanjaju na stare metode.
-                </p>
+                <FadeIn>
+                  <div className="text-[#0f2742]/75 leading-relaxed space-y-6">
+                    <p id="uvod" className="text-xl font-medium text-[#0f2742] leading-relaxed">
+                      {post.excerpt}
+                    </p>
 
-                <h2 className="text-2xl font-bold text-[#0f2742] mt-8 mb-4">Ključne preporuke</h2>
-                <ul className="flex flex-col gap-2 list-disc pl-5">
-                  <li>Redovito ažurirajte kalendar dostupnosti</li>
-                  <li>Odgovarajte na upite unutar jednog sata</li>
-                  <li>Prilagođavajte cijene prema potražnji i sezoni</li>
-                  <li>Investirajte u profesionalne fotografije</li>
-                  <li>Tražite recenzije od svakog gosta</li>
-                </ul>
-              </div>
-            </FadeIn>
+                    <div className="bg-[#f4efe6] border border-[#e8dcc8] rounded-xl p-5 text-sm">
+                      <p className="text-[#0f2742]/60 italic">
+                        📝 <strong>Napomena:</strong> Ovo je placeholder za pravi sadržaj članka.
+                        Zamijenite s pravim tekstom ili integrirajte MDX za upravljanje sadržajem.
+                      </p>
+                    </div>
+
+                    <h2 id="zasto-vazno" className="text-2xl font-bold text-[#0f2742] pt-2">
+                      Zašto je ovo važno?
+                    </h2>
+                    <p>
+                      Kratkoročni najam u Hrvatskoj nastavlja rasti, a vlasnici koji se prilagode
+                      modernim standardima upravljanja bilježe značajno bolje rezultate od onih koji se
+                      oslanjaju na stare metode.
+                    </p>
+
+                    <h2 id="preporuke" className="text-2xl font-bold text-[#0f2742] pt-2">
+                      Ključne preporuke
+                    </h2>
+                    <ul className="flex flex-col gap-2.5 pl-5 list-none">
+                      {[
+                        'Redovito ažurirajte kalendar dostupnosti',
+                        'Odgovarajte na upite unutar jednog sata',
+                        'Prilagođavajte cijene prema potražnji i sezoni',
+                        'Investirajte u profesionalne fotografije',
+                        'Tražite recenzije od svakog gosta',
+                      ].map((item) => (
+                        <li key={item} className="flex items-start gap-2.5">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="flex-shrink-0 mt-0.5">
+                            <path d="M3 8l4 4 6-6" stroke="#c9a86a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </FadeIn>
+              </article>
+
+              {/* TOC sidebar – desktop only */}
+              <aside className="hidden lg:flex flex-col gap-3 w-56 flex-shrink-0 sticky top-28">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#0f2742]/40">
+                  Sadržaj
+                </p>
+                <nav className="flex flex-col gap-1">
+                  {tocItems.map((item) => (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      className="text-sm text-[#0f2742]/60 hover:text-[#c9a86a] hover:pl-2 transition-all duration-200 py-1 border-l-2 border-[#e8dcc8] hover:border-[#c9a86a] pl-3"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </nav>
+
+                {/* Share */}
+                <div className="mt-4 pt-4 border-t border-[#e8dcc8]">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#0f2742]/40 mb-2">
+                    Podijeli
+                  </p>
+                  <div className="flex gap-2">
+                    {[
+                      { label: 'Facebook', icon: '👤' },
+                      { label: 'WhatsApp', icon: '💬' },
+                      { label: 'LinkedIn', icon: '💼' },
+                    ].map((s) => (
+                      <button
+                        key={s.label}
+                        className="w-8 h-8 rounded-lg bg-[#0f2742]/5 border border-[#e8dcc8] flex items-center justify-center text-xs hover:bg-[#0f2742] hover:border-[#0f2742] hover:text-white transition-all"
+                        title={`Podijeli na ${s.label}`}
+                      >
+                        {s.icon}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </aside>
+            </div>
           </div>
-        </article>
+        </div>
+
+        {/* Related posts */}
+        {related.length > 0 && (
+          <section className="py-14 bg-[#f4efe6] border-t border-[#e8dcc8]">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-xl font-bold text-[#0f2742] mb-6">Možda vas zanima i</h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {related.map((p) => (
+                  <a
+                    key={p.slug}
+                    href={`/blog/${p.slug}`}
+                    className="group flex gap-4 bg-white rounded-xl border border-[#e8dcc8] p-4 hover:shadow-md hover:border-[#c9a86a]/30 transition-all duration-200"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0f2742] to-[#1a3a5c] flex items-center justify-center text-2xl flex-shrink-0">
+                      <span className="opacity-60">{p.emoji}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-semibold text-[#c9a86a] uppercase tracking-wider">
+                        {p.tag}
+                      </span>
+                      <p className="text-[#0f2742] text-sm font-semibold leading-snug mt-0.5 group-hover:text-[#c9a86a] transition-colors line-clamp-2">
+                        {p.title}
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* CTA */}
-        <section className="py-14 bg-[#f4efe6] border-t border-[#e8dcc8]">
+        <section className="py-14 bg-white border-t border-[#e8dcc8]">
           <div className="max-w-2xl mx-auto px-4 text-center">
             <p className="text-[#0f2742]/50 text-sm mb-2">Trebate profesionalnu pomoć?</p>
             <h2 className="text-2xl font-bold text-[#0f2742] mb-4">

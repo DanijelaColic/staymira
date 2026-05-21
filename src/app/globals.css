@@ -31,3 +31,9 @@ body {
 [id] {
   scroll-margin-top: 80px;
 }
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

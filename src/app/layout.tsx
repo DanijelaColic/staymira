@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import JsonLd from '@/components/JsonLd';
+import Analytics from '@/components/Analytics';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -9,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://staymira.hr'),
   title: 'StayMira – Profesionalno upravljanje smještajem u Hrvatskoj',
   description:
     'StayMira preuzima kompletno upravljanje vašim apartmanom, kućom za odmor ili vilom. Više rezervacija, veći prihod, manje stresa. Besplatna analiza smještaja.',
@@ -45,6 +48,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hr" className={inter.variable}>
+      <head>
+        <Analytics />
+        <JsonLd />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );

@@ -58,14 +58,22 @@ export default function LeadForm() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    // TODO: replace with real API call (e.g. fetch('/api/contact', { method: 'POST', body: JSON.stringify(form) }))
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('server error');
       setSubmitted(true);
-    }, 1200);
+    } catch {
+      alert('Došlo je do greške. Molimo pokušajte ponovo ili nas kontaktirajte direktno.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   const inputClass =
