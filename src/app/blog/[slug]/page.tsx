@@ -6,6 +6,7 @@ import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { hasBlogContent } from '@/lib/blog';
 import { posts } from '../page';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -45,6 +46,17 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   // Related posts = same tag, exclude current
+  // Dynamically import MDX content if available
+  let MdxContent: React.ComponentType | null = null;
+  if (hasBlogContent(slug)) {
+    try {
+      const mod = await import(`@/content/blog/${slug}.mdx`);
+      MdxContent = mod.default;
+    } catch {
+      // MDX not found, fall back to placeholder
+    }
+  }
+
   const related = posts.filter((p) => p.slug !== slug && p.tag === post.tag).slice(0, 3);
   // Fill with other posts if not enough
   if (related.length < 2) {
@@ -107,46 +119,21 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
 
                 <FadeIn>
-                  <div className="text-[#0f2742]/75 leading-relaxed space-y-6">
-                    <p id="uvod" className="text-xl font-medium text-[#0f2742] leading-relaxed">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="bg-[#f4efe6] border border-[#e8dcc8] rounded-xl p-5 text-sm">
-                      <p className="text-[#0f2742]/60 italic">
-                        📝 <strong>Napomena:</strong> Ovo je placeholder za pravi sadržaj članka.
-                        Zamijenite s pravim tekstom ili integrirajte MDX za upravljanje sadržajem.
-                      </p>
-                    </div>
-
-                    <h2 id="zasto-vazno" className="text-2xl font-bold text-[#0f2742] pt-2">
-                      Zašto je ovo važno?
-                    </h2>
-                    <p>
-                      Kratkoročni najam u Hrvatskoj nastavlja rasti, a vlasnici koji se prilagode
-                      modernim standardima upravljanja bilježe značajno bolje rezultate od onih koji se
-                      oslanjaju na stare metode.
-                    </p>
-
-                    <h2 id="preporuke" className="text-2xl font-bold text-[#0f2742] pt-2">
-                      Ključne preporuke
-                    </h2>
-                    <ul className="flex flex-col gap-2.5 pl-5 list-none">
-                      {[
-                        'Redovito ažurirajte kalendar dostupnosti',
-                        'Odgovarajte na upite unutar jednog sata',
-                        'Prilagođavajte cijene prema potražnji i sezoni',
-                        'Investirajte u profesionalne fotografije',
-                        'Tražite recenzije od svakog gosta',
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-2.5">
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="flex-shrink-0 mt-0.5">
-                            <path d="M3 8l4 4 6-6" stroke="#c9a86a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div id="uvod" className="mdx-content">
+                    {MdxContent ? (
+                      <MdxContent />
+                    ) : (
+                      // Fallback placeholder if no MDX file exists
+                      <div className="space-y-6 text-[#0f2742]/75 leading-relaxed">
+                        <p className="text-xl font-medium text-[#0f2742]">{post.excerpt}</p>
+                        <div className="bg-[#f4efe6] border border-[#e8dcc8] rounded-xl p-5 text-sm">
+                          <p className="text-[#0f2742]/60 italic">
+                            📝 <strong>Napomena:</strong> Dodajte MDX datoteku u{' '}
+                            <code>src/content/blog/{slug}.mdx</code> za pravi sadržaj.
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </FadeIn>
               </article>

@@ -7,6 +7,7 @@ import ForWhom from '@/components/ForWhom';
 import Process from '@/components/Process';
 import Calculator from '@/components/Calculator';
 import Benefits from '@/components/Benefits';
+import Testimonials from '@/components/Testimonials';
 import CaseStudies from '@/components/CaseStudies';
 import Gallery from '@/components/Gallery';
 import Pricing from '@/components/Pricing';
@@ -18,6 +19,7 @@ import BlogPreview from '@/components/BlogPreview';
 import Footer from '@/components/Footer';
 import FloatingUI from '@/components/FloatingUI';
 import CookieBanner from '@/components/CookieBanner';
+import ExitIntentPopup from '@/components/ExitIntentPopup';
 import FadeIn from '@/components/FadeIn';
 
 export default function Home() {
@@ -35,6 +37,7 @@ export default function Home() {
         <FadeIn><Process /></FadeIn>
         <FadeIn><Calculator /></FadeIn>
         <FadeIn><Benefits /></FadeIn>
+        <FadeIn><Testimonials /></FadeIn>
         <FadeIn><CaseStudies /></FadeIn>
         <FadeIn><Gallery /></FadeIn>
         <FadeIn><Pricing /></FadeIn>
@@ -48,6 +51,7 @@ export default function Home() {
       <Footer />
       <FloatingUI />
       <CookieBanner />
+      <ExitIntentPopup />
     </>
   );
 }

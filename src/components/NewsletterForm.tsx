@@ -4,11 +4,25 @@ import { useState } from 'react';
 
 export default function NewsletterForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: connect to email service (Mailchimp, Resend, etc.)
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error();
+      setSubmitted(true);
+    } catch {
+      alert('Greška. Molimo pokušajte ponovo.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -37,13 +51,16 @@ export default function NewsletterForm() {
                 type="email"
                 placeholder="vaš@email.hr"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 sm:w-64 bg-white/5 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-[#e8dcc8]/30 focus:outline-none focus:border-[#c9a86a]/60 transition-colors"
               />
               <button
                 type="submit"
-                className="flex-shrink-0 bg-[#c9a86a] hover:bg-[#b8924f] text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
+                disabled={loading}
+                className="flex-shrink-0 bg-[#c9a86a] hover:bg-[#b8924f] disabled:opacity-60 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
               >
-                Pretplati se
+                {loading ? '...' : 'Pretplati se'}
               </button>
             </form>
           )}

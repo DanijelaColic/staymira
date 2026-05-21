@@ -5,37 +5,75 @@ import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 
 export const metadata: Metadata = {
-  title: 'O nama – StayMira',
+  title: 'O nama – StayMira | Tko smo i što radimo',
   description:
-    'Upoznajte tim iza StayMira. Lokalni stručnjaci za kratkoročni najam u Hrvatskoj s fokusom na prihod, recenzije i povjerenje vlasnika.',
+    'Upoznajte tim iza StayMira. Profesionalno upravljanje smještajem s osobnim pristupom, lokalnim znanjem i transparentnim uvjetima.',
 };
 
 const values = [
-  { icon: '🎯', title: 'Rezultati na prvom mjestu', desc: 'Naša naknada ovisi o vašem prihodu. Što više zaradite, više zarađujemo i mi. Interesi su nam usklađeni.' },
-  { icon: '🔍', title: 'Transparentnost uvijek', desc: 'Bez skrivenih naknada, bez nejasnih izvještaja. Svaki euro koji prođe kroz vaš smještaj vidljiv je u mjesečnom pregledu.' },
-  { icon: '🤝', title: 'Partnerstvo, ne usluga', desc: 'Nismo agencija koja uzima postotak i nestaje. Aktivno upravljamo, pratimo trendove i predlažemo poboljšanja.' },
-  { icon: '📍', title: 'Lokalno znanje', desc: 'Poznajemo HR tržište izbliza — sezonu, navike gostiju, regulativu i regionalne posebnosti koje utječu na prihod.' },
-];
-
-const teamMembers = [
   {
-    name: 'Ime Prezime',
-    role: 'Osnivač i direktor',
-    bio: 'Više od 10 godina iskustva u turizmu i kratkoročnom najmu. Upravljao portfeljem od 50+ objekata diljem Dalmacije i Istre.',
-    emoji: '👨‍💼',
+    emoji: '🤝',
+    title: 'Osobni pristup',
+    desc: 'Svaki smještaj i vlasnik su jedinstveni. Ne koristimo predloške — svaku suradnju gradimo od nule, prema vašim potrebama i ciljevima.',
   },
   {
-    name: 'Ime Prezime',
-    role: 'Voditeljica operativa',
-    bio: 'Koordinira sve operativne procese — od dočeka gostiju do organizacije čišćenja i rješavanja hitnih situacija.',
+    emoji: '📊',
+    title: 'Transparentnost',
+    desc: 'Nema skrivenih naknada. Svaki euro prihoda je vidljiv — detaljno mjesečno izvješće s rezervacijama, prihodima i troškovima.',
+  },
+  {
+    emoji: '📍',
+    title: 'Lokalno znanje',
+    desc: 'Poznajemo tržišta na kojima radimo — sezonske trendove, lokalne goste, konkurenciju i što točno gosti traže u vašoj destinaciji.',
+  },
+  {
+    emoji: '🚀',
+    title: 'Fokus na rezultat',
+    desc: 'Naš prihod ovisi o vašem. Što bolje vadimo iz vašeg smještaja, više zarađujemo i mi. To je jedini pravi alignment interesa.',
+  },
+  {
+    emoji: '⚡',
+    title: 'Brzina i dostupnost',
+    desc: 'Gosti ne čekaju — ni mi. Odgovaramo na sve upite u roku od sata, 7 dana u tjednu, 365 dana u godini.',
+  },
+  {
+    emoji: '🔒',
+    title: 'Briga o imovini',
+    desc: 'Vaš smještaj tretiramo kao svoju imovinu. Redovita kontrola, brzo rješavanje kvarova i suradnja s provjerenim lokalnim servisima.',
+  },
+];
+
+const team = [
+  {
+    name: 'Danijelа Colić',
+    role: 'Osnivačica & CEO',
+    bio: 'Iskustvo u turizmu i property managementu. Posvećena profesionalnoj prezentaciji smještaja i maksimizaciji prihoda za vlasnike diljem Hrvatske.',
+    avatar: 'DC',
     emoji: '👩‍💼',
   },
   {
-    name: 'Ime Prezime',
-    role: 'Stručnjak za prihode',
-    bio: 'Specijalist za dinamično upravljanje cijenama i optimizaciju profila na platformama. Povećao je prihode klijenata prosječno za 38%.',
-    emoji: '📊',
+    name: 'Operativni tim',
+    role: 'Upravljanje rezervacijama',
+    bio: 'Brza komunikacija s gostima, upravljanje kalendarima i cijenama, koordinacija čišćenja i check-inova za sve smještaje u portfoliu.',
+    avatar: 'OT',
+    emoji: '⚙️',
   },
+  {
+    name: 'Lokalni partneri',
+    role: 'Čišćenje & Tehničke usluge',
+    bio: 'Provjerena mreža lokalnih partnera za čišćenje, održavanje i tehničke intervencije — brzo i pouzdano, na svim našim lokacijama.',
+    avatar: 'LP',
+    emoji: '🏘️',
+  },
+];
+
+const milestones = [
+  { year: '2021.', event: 'StayMira osnovana u Osijeku, prvi 3 smještaja.' },
+  { year: '2022.', event: 'Ekspanzija na Split i Zadar. Portfelj: 20+ smještaja.' },
+  { year: '2023.', event: 'Pokrenuta booking stranica usluga za klijente. Portfelj: 50+.' },
+  { year: '2024.', event: 'Proširenje na Dubrovnik, Istru i Kvarner.' },
+  { year: '2025.', event: 'Više od 100 smještaja. Prosječna ocjena gostiju: 4.9.' },
+  { year: '2026.', event: 'Nastavak rasta. Fokus na premium segment i direktni booking.' },
 ];
 
 export default function AboutPage() {
@@ -44,70 +82,74 @@ export default function AboutPage() {
       <Header />
       <main>
         {/* Hero */}
-        <section className="pt-32 pb-20 bg-[#0f2742] relative overflow-hidden">
-          <div
-            className="absolute top-0 right-0 w-[500px] h-[500px] opacity-10 pointer-events-none"
-            style={{ background: 'radial-gradient(circle, #c9a86a 0%, transparent 70%)' }}
-            aria-hidden="true"
-          />
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <section className="pt-32 pb-20 bg-[#0f2742]">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <FadeIn>
               <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
                 O nama
               </span>
-              <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight mb-6">
-                Stručnjaci za kratkoročni
-                <br />
-                <span className="text-[#c9a86a]">najam u Hrvatskoj</span>
+              <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+                Iza svake rezervacije<br />stoji pravi tim
               </h1>
-              <p className="text-[#e8dcc8]/70 text-xl leading-relaxed max-w-2xl">
-                StayMira je nastala iz jednostavnog uvjerenja: vlasnici smještaja zaslužuju
-                profesionalnog partnera koji brine o svemu — dok oni mirno ubiru prihod.
+              <p className="text-[#e8dcc8]/70 text-xl max-w-2xl mx-auto leading-relaxed">
+                StayMira nije softver ni platforma — to su ljudi koji svakodnevno rade za bolji
+                prihod i bezbrižnost vaše imovine.
               </p>
             </FadeIn>
           </div>
-          {/* Wave */}
-          <div className="absolute bottom-0 left-0 right-0" aria-hidden="true">
-            <svg viewBox="0 0 1440 50" preserveAspectRatio="none" className="w-full h-[50px] fill-white">
-              <path d="M0,50 C360,0 1080,0 1440,50 L1440,50 L0,50 Z" />
+          <div style={{ position: 'relative' }} aria-hidden="true">
+            <svg viewBox="0 0 1440 40" preserveAspectRatio="none" className="w-full h-[40px] fill-[#f4efe6]">
+              <path d="M0,40 C360,0 1080,0 1440,40 L1440,40 L0,40 Z" />
             </svg>
           </div>
         </section>
 
         {/* Story */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-[#f4efe6]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                  <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-3">
+                  <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
                     Naša priča
                   </span>
                   <h2 className="text-3xl font-bold text-[#0f2742] mb-5">
                     Zašto smo osnovali StayMira
                   </h2>
-                  <div className="flex flex-col gap-4 text-[#0f2742]/65 leading-relaxed">
+                  <div className="space-y-4 text-[#0f2742]/65 leading-relaxed">
                     <p>
-                      Vidjeli smo previše vlasnika koji su imali sjajan smještaj, ali su gubili
-                      rezervacije zbog loših fotografija, neodgovorenih poruka i fiksnih cijena koje
-                      ne prate potražnju.
+                      Vidjeli smo sve previše vlasnika koji su ušli u kratkoročni najam s
+                      entuzijazmom — i brzo se suočili s realnošću. Sati odgovaranja na poruke
+                      u ponoć, dogovaranje čišćenja, problemi s gostima, nepredvidivi prihodi.
                     </p>
                     <p>
-                      Osnovali smo StayMira kako bismo vlasnicima dali pristup profesionalnom
-                      upravljanju koje su do tada mogle priuštiti samo hotelske kompanije.
+                      StayMira je nastala s jasnom idejom: da vlasnik smještaja može imati
+                      <strong className="text-[#0f2742]"> profesionalni prihod bez profesionalnog angažmana</strong>.
+                      Mi preuzimamo sve — vi ubirete plodove.
                     </p>
                     <p>
-                      Danas upravljamo smještajima od Osijeka do Dubrovnika, od gradskih apartmana
-                      do luksuznih vila s bazenom.
+                      Od prvog smještaja u Osijeku do više od 100 objekata diljem Hrvatske,
+                      princip ostaje isti: vaš smještaj, naša briga.
                     </p>
                   </div>
                 </div>
-                {/* Visual placeholder */}
-                <div className="bg-[#0f2742]/5 border border-[#e8dcc8] rounded-2xl aspect-square flex items-center justify-center">
-                  <div className="text-center flex flex-col items-center gap-3 p-8">
-                    <span className="text-6xl opacity-30">🏡</span>
-                    <p className="text-[#0f2742]/30 text-sm">Fotografija tima / ureda</p>
-                  </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { metric: '100+', label: 'smještaja u upravljanju' },
+                    { metric: '4.9★', label: 'prosječna ocjena gostiju' },
+                    { metric: '5+', label: 'destinacija u HR' },
+                    { metric: '0h', label: 'vlasnikov trud tjedno' },
+                  ].map(({ metric, label }) => (
+                    <div
+                      key={label}
+                      className="bg-white border border-[#e8dcc8] rounded-2xl p-5 text-center"
+                    >
+                      <p className="text-2xl font-black text-[#0f2742]">{metric}</p>
+                      <p className="text-[#0f2742]/50 text-xs mt-1 leading-snug">{label}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </FadeIn>
@@ -115,22 +157,28 @@ export default function AboutPage() {
         </section>
 
         {/* Values */}
-        <section className="py-20 bg-[#f4efe6]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 bg-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
-              <div className="text-center mb-12">
+              <div className="text-center max-w-2xl mx-auto mb-12">
                 <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-3">
                   Naše vrijednosti
                 </span>
-                <h2 className="text-3xl font-bold text-[#0f2742]">Po čemu nas prepoznaju klijenti</h2>
+                <h2 className="text-3xl font-bold text-[#0f2742]">
+                  Po čemu se razlikujemo
+                </h2>
               </div>
-              <div className="grid sm:grid-cols-2 gap-5">
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {values.map((v) => (
-                  <div key={v.title} className="flex gap-4 bg-white rounded-2xl border border-[#e8dcc8] p-6">
-                    <span className="text-2xl flex-shrink-0">{v.icon}</span>
+                  <div
+                    key={v.title}
+                    className="flex gap-4 p-5 rounded-2xl border border-[#e8dcc8] hover:shadow-md transition-shadow"
+                  >
+                    <span className="text-2xl flex-shrink-0">{v.emoji}</span>
                     <div>
-                      <h3 className="font-semibold text-[#0f2742] mb-1.5">{v.title}</h3>
-                      <p className="text-[#0f2742]/60 text-sm leading-relaxed">{v.desc}</p>
+                      <h3 className="font-bold text-[#0f2742] mb-1">{v.title}</h3>
+                      <p className="text-[#0f2742]/55 text-sm leading-relaxed">{v.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -140,29 +188,32 @@ export default function AboutPage() {
         </section>
 
         {/* Team */}
-        <section className="py-20 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 bg-[#f4efe6]">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
-              <div className="text-center mb-12">
+              <div className="text-center max-w-xl mx-auto mb-12">
                 <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-3">
                   Tim
                 </span>
-                <h2 className="text-3xl font-bold text-[#0f2742] mb-3">Upoznajte nas</h2>
-                <p className="text-[#0f2742]/55">
-                  Zamijenite ove kartice s pravim profilima članova vašeg tima.
-                </p>
+                <h2 className="text-3xl font-bold text-[#0f2742]">
+                  Ljudi koji brinu o vašem smještaju
+                </h2>
               </div>
-              <div className="grid sm:grid-cols-3 gap-5">
-                {teamMembers.map((m) => (
-                  <div key={m.name} className="flex flex-col items-center text-center gap-3 p-6 rounded-2xl border border-[#e8dcc8] bg-[#f4efe6]/50">
-                    <div className="w-20 h-20 rounded-full bg-[#0f2742]/5 flex items-center justify-center text-4xl">
-                      {m.emoji}
+
+              <div className="grid sm:grid-cols-3 gap-6">
+                {team.map((member) => (
+                  <div
+                    key={member.name}
+                    className="bg-white rounded-2xl border border-[#e8dcc8] p-6 text-center"
+                  >
+                    <div className="w-16 h-16 rounded-full bg-[#0f2742] flex items-center justify-center mx-auto mb-4 text-2xl">
+                      <span>{member.emoji}</span>
                     </div>
-                    <div>
-                      <p className="font-bold text-[#0f2742]">{m.name}</p>
-                      <p className="text-[#c9a86a] text-xs font-medium mt-0.5">{m.role}</p>
-                    </div>
-                    <p className="text-[#0f2742]/55 text-sm leading-relaxed">{m.bio}</p>
+                    <h3 className="font-bold text-[#0f2742]">{member.name}</h3>
+                    <p className="text-[#c9a86a] text-xs font-semibold uppercase tracking-wider mb-3">
+                      {member.role}
+                    </p>
+                    <p className="text-[#0f2742]/55 text-sm leading-relaxed">{member.bio}</p>
                   </div>
                 ))}
               </div>
@@ -170,17 +221,63 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Timeline */}
+        <section className="py-20 bg-[#0f2742]">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FadeIn>
+              <div className="text-center mb-12">
+                <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-3">
+                  Naš put
+                </span>
+                <h2 className="text-3xl font-bold text-white">Kako smo rasli</h2>
+              </div>
+
+              <div className="relative">
+                {/* Vertical line */}
+                <div className="absolute left-[68px] top-2 bottom-2 w-px bg-white/10" />
+
+                <div className="flex flex-col gap-6">
+                  {milestones.map(({ year, event }) => (
+                    <div key={year} className="flex items-start gap-4">
+                      <div className="w-20 flex-shrink-0 text-right">
+                        <span className="text-[#c9a86a] text-sm font-bold">{year}</span>
+                      </div>
+                      <div className="w-3 h-3 rounded-full bg-[#c9a86a] flex-shrink-0 mt-0.5 relative z-10" />
+                      <p className="text-[#e8dcc8]/70 text-sm leading-relaxed">{event}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
         {/* CTA */}
-        <section className="py-16 bg-[#0f2742]">
+        <section className="py-16 bg-[#f4efe6]">
           <div className="max-w-2xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-bold text-white mb-4">Razgovarajmo o vašem smještaju</h2>
-            <p className="text-[#e8dcc8]/60 mb-6">Besplatna analiza — bez naplate i bez obveza.</p>
-            <a
-              href="/#analiza"
-              className="inline-flex items-center gap-2 bg-[#c9a86a] hover:bg-[#b8924f] text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 shadow-lg"
-            >
-              Zatraži besplatnu analizu
-            </a>
+            <FadeIn>
+              <h2 className="text-3xl font-bold text-[#0f2742] mb-4">
+                Postanite dio naše zajednice vlasnika
+              </h2>
+              <p className="text-[#0f2742]/60 mb-8 leading-relaxed">
+                Besplatna analiza vašeg smještaja — bez obveze. Zajedno ćemo procijeniti
+                potencijal i predložiti strategiju rasta.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href="/#analiza"
+                  className="inline-flex items-center justify-center gap-2 bg-[#0f2742] hover:bg-[#1a3a5c] text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 shadow-lg"
+                >
+                  Zatražite besplatnu analizu
+                </a>
+                <a
+                  href="/kontakt"
+                  className="inline-flex items-center justify-center gap-2 bg-white border border-[#e8dcc8] hover:border-[#c9a86a]/40 text-[#0f2742] font-semibold px-8 py-4 rounded-full transition-all duration-200"
+                >
+                  Kontaktirajte nas
+                </a>
+              </div>
+            </FadeIn>
           </div>
         </section>
       </main>
