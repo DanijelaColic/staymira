@@ -85,22 +85,48 @@ export default function NotFound() {
           </a>
         </div>
 
-        {/* Quick links */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        {/* Quick navigation cards */}
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl w-full">
           {[
-            { label: 'Usluge', href: '/#usluge' },
-            { label: 'Kako radimo', href: '/#kako-radimo' },
-            { label: 'Destinacije', href: '/#destinacije' },
-            { label: 'Blog', href: '/#blog' },
+            { label: 'Usluge', href: '/usluge', icon: '⚙️', desc: 'Što nudimo' },
+            { label: 'Paketi', href: '/paketi', icon: '💼', desc: 'Cijene' },
+            { label: 'Destinacije', href: '/destinacije', icon: '📍', desc: '8 gradova' },
+            { label: 'Blog', href: '/blog', icon: '✍️', desc: 'Savjeti' },
           ].map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-[#e8dcc8]/40 text-sm hover:text-[#c9a86a] transition-colors"
+              className="flex flex-col items-center gap-1 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#c9a86a]/30 rounded-xl p-4 transition-all group"
             >
-              {link.label}
+              <span className="text-2xl">{link.icon}</span>
+              <span className="text-sm font-semibold text-white group-hover:text-[#c9a86a] transition-colors">
+                {link.label}
+              </span>
+              <span className="text-[10px] text-[#e8dcc8]/40">{link.desc}</span>
             </a>
           ))}
+        </div>
+
+        {/* Popular blog posts text links */}
+        <div className="mt-6 text-center">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-[#e8dcc8]/30 mb-3">
+            Popularni članci
+          </p>
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-1.5">
+            {[
+              { label: 'Kako povećati prihod od apartmana', href: '/blog/kako-povecati-prihod-apartmana' },
+              { label: 'Dinamične cijene u sezoni', href: '/blog/dinamicne-cijene-sezona' },
+              { label: 'Booking.com vs Airbnb', href: '/blog/booking-vs-airbnb' },
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-xs text-[#e8dcc8]/40 hover:text-[#c9a86a] transition-colors underline underline-offset-2"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>

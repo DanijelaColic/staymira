@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import { FaqJsonLd } from '@/components/JsonLd';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const uslugestFaq = [
   { q: 'Mogu li koristiti samo neke usluge, a ne sve?', a: 'Da, možemo prilagoditi suradnju vašim potrebama. Neki vlasnici žele samo upravljanje cijenama i oglasima, dok drugi prepuštaju sve. Kontaktirajte nas i zajedno dogovorimo što ima smisla za vaš smještaj.' },
@@ -179,6 +180,14 @@ export default function UslugePage() {
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
+              <div className="mb-6">
+                <Breadcrumbs
+                  crumbs={[
+                    { label: 'Početna', href: '/' },
+                    { label: 'Usluge' },
+                  ]}
+                />
+              </div>
               <div className="max-w-3xl">
                 <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
                   Što nudimo

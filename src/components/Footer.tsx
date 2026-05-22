@@ -10,6 +10,7 @@ const footerLinks = {
     { label: 'O nama', href: '/o-nama' },
     { label: 'Paketi i cijene', href: '/paketi' },
     { label: 'Destinacije', href: '/destinacije' },
+    { label: 'Studije slučaja', href: '/studije-slucaja' },
     { label: 'Blog', href: '/blog' },
     { label: 'Kontakt', href: '/kontakt' },
   ],

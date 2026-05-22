@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'O nama – StayMira | Tko smo i što radimo',
@@ -85,6 +86,14 @@ export default function AboutPage() {
         <section className="pt-32 pb-20 bg-[#0f2742]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <FadeIn>
+              <div className="flex justify-center mb-6">
+                <Breadcrumbs
+                  crumbs={[
+                    { label: 'Početna', href: '/' },
+                    { label: 'O nama' },
+                  ]}
+                />
+              </div>
               <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
                 O nama
               </span>

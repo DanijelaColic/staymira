@@ -6,6 +6,7 @@ import LeadForm from '@/components/LeadForm';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import { FaqJsonLd } from '@/components/JsonLd';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Kontakt – StayMira | Besplatna analiza smještaja',
@@ -109,6 +110,14 @@ export default function ContactPage() {
           </div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
+              <div className="mb-6">
+                <Breadcrumbs
+                  crumbs={[
+                    { label: 'Početna', href: '/' },
+                    { label: 'Kontakt' },
+                  ]}
+                />
+              </div>
               <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
                 Kontakt
               </span>

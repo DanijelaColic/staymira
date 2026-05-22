@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Post = {
   slug: string;
@@ -10,6 +11,7 @@ type Post = {
   title: string;
   excerpt: string;
   emoji: string;
+  photoId: string;
   date: string;
   author: string;
 };
@@ -60,8 +62,15 @@ export default function BlogFilter({ posts }: Props) {
             href={`/blog/${post.slug}`}
             className="group flex flex-col rounded-2xl border border-[#e8dcc8] overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
           >
-            <div className="h-44 bg-gradient-to-br from-[#0f2742] to-[#1a3a5c] flex items-center justify-center">
-              <span className="text-5xl opacity-60">{post.emoji}</span>
+            <div className="h-44 relative overflow-hidden bg-[#0f2742]">
+              <Image
+                src={`https://images.unsplash.com/${post.photoId}?auto=format&fit=crop&w=600&q=70`}
+                alt={post.title}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
             </div>
             <div className="flex flex-col flex-1 gap-3 p-6">
               <div className="flex items-center gap-2">

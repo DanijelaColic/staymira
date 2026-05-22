@@ -44,12 +44,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
-    {
-      url: `${BASE_URL}/paketi`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+          {
+            url: `${BASE_URL}/paketi`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+          },
+          {
+            url: `${BASE_URL}/studije-slucaja`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+          },
     ...destinationPages,
     {
       url: `${BASE_URL}/kontakt`,

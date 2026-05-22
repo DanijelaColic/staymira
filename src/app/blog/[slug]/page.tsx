@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
@@ -118,9 +119,18 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="flex gap-12 items-start">
               {/* Main content */}
               <article className="flex-1 min-w-0">
-                {/* Cover */}
-                <div className="h-52 bg-gradient-to-br from-[#0f2742] to-[#1a3a5c] rounded-2xl flex items-center justify-center mb-10">
-                  <span className="text-7xl opacity-60">{post.emoji}</span>
+                {/* Cover image */}
+                <div className="relative h-64 rounded-2xl overflow-hidden mb-10 bg-[#0f2742]">
+                  <Image
+                    src={`https://images.unsplash.com/${post.photoId}?auto=format&fit=crop&w=900&q=80`}
+                    alt={post.title}
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  <span className="absolute bottom-4 left-4 text-3xl">{post.emoji}</span>
                 </div>
 
                 <FadeIn>
@@ -175,19 +185,52 @@ export default async function BlogPostPage({ params }: Props) {
                   <p className="text-[10px] font-bold uppercase tracking-widest text-[#0f2742]/40 mb-2">
                     Podijeli
                   </p>
-                  <div className="flex gap-2">
+                  <div className="flex flex-col gap-2">
                     {[
-                      { label: 'Facebook', icon: '👤' },
-                      { label: 'WhatsApp', icon: '💬' },
-                      { label: 'LinkedIn', icon: '💼' },
+                      {
+                        label: 'Facebook',
+                        href: `https://www.facebook.com/sharer/sharer.php?u=https://staymira.hr/blog/${slug}`,
+                        color: '#1877F2',
+                        icon: (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        label: 'WhatsApp',
+                        href: `https://wa.me/?text=${encodeURIComponent(`${post.title} — https://staymira.hr/blog/${slug}`)}`,
+                        color: '#25D366',
+                        icon: (
+                          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 1C5.03 1 1 5.03 1 10c0 1.6.42 3.1 1.14 4.4L1 19l4.72-1.12A9 9 0 1010 1zm4.07 10.88c-.22-.11-1.32-.65-1.52-.73-.2-.07-.35-.11-.5.11-.15.22-.57.73-.7.88-.13.15-.26.17-.48.06-.22-.12-.94-.35-1.79-1.1-.66-.6-1.11-1.33-1.24-1.55-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.4.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.4-.06-.11-.5-1.2-.68-1.65-.18-.43-.37-.37-.5-.38h-.43c-.15 0-.4.06-.6.28-.2.22-.78.76-.78 1.86s.8 2.16.91 2.31c.11.15 1.57 2.4 3.8 3.36.53.23.95.37 1.27.47.53.17 1.02.14 1.4.09.43-.06 1.32-.54 1.51-1.06.19-.52.19-.97.13-1.06-.06-.09-.21-.15-.43-.26z" />
+                          </svg>
+                        ),
+                      },
+                      {
+                        label: 'LinkedIn',
+                        href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://staymira.hr/blog/${slug}`)}`,
+                        color: '#0A66C2',
+                        icon: (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                            <circle cx="4" cy="4" r="2" />
+                          </svg>
+                        ),
+                      },
                     ].map((s) => (
-                      <button
+                      <a
                         key={s.label}
-                        className="w-8 h-8 rounded-lg bg-[#0f2742]/5 border border-[#e8dcc8] flex items-center justify-center text-xs hover:bg-[#0f2742] hover:border-[#0f2742] hover:text-white transition-all"
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         title={`Podijeli na ${s.label}`}
+                        className="flex items-center gap-2.5 text-xs font-medium text-[#0f2742]/60 hover:text-[#0f2742] border border-[#e8dcc8] hover:border-[#0f2742]/20 rounded-lg px-3 py-2 transition-all hover:bg-[#f4efe6]"
+                        style={{ ['--share-color' as string]: s.color }}
                       >
-                        {s.icon}
-                      </button>
+                        <span style={{ color: s.color }}>{s.icon}</span>
+                        {s.label}
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -208,8 +251,14 @@ export default async function BlogPostPage({ params }: Props) {
                     href={`/blog/${p.slug}`}
                     className="group flex gap-4 bg-white rounded-xl border border-[#e8dcc8] p-4 hover:shadow-md hover:border-[#c9a86a]/30 transition-all duration-200"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0f2742] to-[#1a3a5c] flex items-center justify-center text-2xl flex-shrink-0">
-                      <span className="opacity-60">{p.emoji}</span>
+                    <div className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 bg-[#0f2742]">
+                      <Image
+                        src={`https://images.unsplash.com/${p.photoId}?auto=format&fit=crop&w=100&q=60`}
+                        alt={p.title}
+                        fill
+                        sizes="48px"
+                        className="object-cover"
+                      />
                     </div>
                     <div>
                       <span className="text-[10px] font-semibold text-[#c9a86a] uppercase tracking-wider">

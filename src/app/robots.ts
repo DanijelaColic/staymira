@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/'],
+      disallow: ['/api/', '/hvala', '/newsletter/hvala'],
     },
     sitemap: 'https://staymira.hr/sitemap.xml',
   };
