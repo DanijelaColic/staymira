@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import { FaqJsonLd } from '@/components/JsonLd';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { BLUR_DATA_URL } from '@/lib/image';
 
 export const metadata: Metadata = {
   title: 'Paketi i cijene – StayMira | Transparentno upravljanje smještajem',
@@ -159,44 +161,64 @@ export default function PaketiPage() {
       <Header />
       <main>
         {/* Hero */}
-        <section className="pt-32 pb-16 bg-[#0f2742] relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <div className="absolute top-0 right-1/3 w-80 h-80 bg-[#c9a86a]/5 rounded-full blur-3xl -translate-y-1/2" />
-          </div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="pt-32 pb-0 bg-[#0f2742] relative overflow-hidden">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
             <FadeIn>
-              <div className="mb-6">
-                <Breadcrumbs
-                  crumbs={[
-                    { label: 'Početna', href: '/' },
-                    { label: 'Paketi i cijene' },
-                  ]}
-                />
-              </div>
-              <div className="max-w-3xl">
-                <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
-                  Transparentni uvjeti
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight">
-                  Paketi i cijene
-                </h1>
-                <p className="text-[#e8dcc8]/70 text-lg leading-relaxed max-w-2xl mb-8">
-                  Bez fiksnih troškova. Plaćate postotak od ostvarenog prihoda —{' '}
-                  <strong className="text-[#e8dcc8]">zarađujemo zajedno ili ne zarađujemo uopće</strong>.
-                </p>
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                {/* Left — text */}
+                <div>
+                  <div className="mb-6">
+                    <Breadcrumbs
+                      crumbs={[
+                        { label: 'Početna', href: '/' },
+                        { label: 'Paketi i cijene' },
+                      ]}
+                    />
+                  </div>
+                  <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
+                    Transparentni uvjeti
+                  </span>
+                  <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight">
+                    Paketi i cijene
+                  </h1>
+                  <p className="text-[#e8dcc8]/70 text-lg leading-relaxed mb-8">
+                    Bez fiksnih troškova. Plaćate postotak od ostvarenog prihoda —{' '}
+                    <strong className="text-[#e8dcc8]">zarađujemo zajedno ili ne zarađujemo uopće</strong>.
+                  </p>
+                  <div className="flex flex-wrap gap-6">
+                    {[
+                      { icon: '✓', text: '0 fiksnih naknada' },
+                      { icon: '✓', text: 'Bez ugovora na godinu dana' },
+                      { icon: '✓', text: 'Otkazivanje uz 30 dana najave' },
+                    ].map(({ icon, text }) => (
+                      <div key={text} className="flex items-center gap-2">
+                        <span className="text-[#c9a86a] font-bold">{icon}</span>
+                        <span className="text-[#e8dcc8]/70 text-sm">{text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-                {/* 3 key trust points */}
-                <div className="flex flex-wrap gap-6">
-                  {[
-                    { icon: '✓', text: '0 fiksnih naknada' },
-                    { icon: '✓', text: 'Bez ugovora na godinu dana' },
-                    { icon: '✓', text: 'Otkazivanje uz 30 dana najave' },
-                  ].map(({ icon, text }) => (
-                    <div key={text} className="flex items-center gap-2">
-                      <span className="text-[#c9a86a] font-bold">{icon}</span>
-                      <span className="text-[#e8dcc8]/70 text-sm">{text}</span>
+                {/* Right — property photo */}
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] hidden lg:block">
+                  <Image
+                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=75"
+                    alt="Premium apartman — StayMira paketi upravljanja"
+                    fill
+                    sizes="50vw"
+                    className="object-cover"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f2742]/50 to-transparent" />
+                  {/* Badge */}
+                  <div className="absolute bottom-5 left-5 right-5">
+                    <div className="bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#c9a86a]">Najpopularniji paket</p>
+                      <p className="text-[#0f2742] font-bold text-sm">Standard · 22% od prihoda</p>
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
             </FadeIn>

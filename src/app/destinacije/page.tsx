@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import { destinations } from '@/lib/destinations';
+import { BLUR_DATA_URL } from '@/lib/image';
 
 export const metadata: Metadata = {
   title: 'Destinacije – StayMira | Upravljanje smještajem diljem Hrvatske',
@@ -170,15 +172,18 @@ function DestCard({
           : 'border-[#e8dcc8] bg-white'
       }`}
     >
-      {/* Card header */}
-      <div
-        className={`h-32 flex items-center justify-center relative ${
-          featured
-            ? 'bg-gradient-to-br from-[#0f2742] to-[#1a3a5c]'
-            : 'bg-gradient-to-br from-[#f4efe6] to-[#e8dcc8]'
-        }`}
-      >
-        <span className="text-5xl">{dest.emoji}</span>
+      {/* Card header — Unsplash photo */}
+      <div className="h-40 relative overflow-hidden">
+        <Image
+          src={`https://images.unsplash.com/${dest.photoId}?auto=format&fit=crop&w=600&q=70`}
+          alt={`${dest.name} — upravljanje smještajem`}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         {featured && (
           <span className="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-[#c9a86a] text-white px-2 py-0.5 rounded-full">
             Puni servis

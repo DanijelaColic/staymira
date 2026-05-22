@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
@@ -7,6 +8,7 @@ import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import { FaqJsonLd } from '@/components/JsonLd';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { BLUR_DATA_URL } from '@/lib/image';
 
 export const metadata: Metadata = {
   title: 'Kontakt – StayMira | Besplatna analiza smještaja',
@@ -115,31 +117,48 @@ export default function ContactPage() {
       <Header />
       <main>
         {/* Page hero */}
-        <section className="pt-32 pb-12 bg-[#0f2742] relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[#c9a86a]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-          </div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="pt-32 pb-0 bg-[#0f2742] relative overflow-hidden">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
             <FadeIn>
-              <div className="mb-6">
-                <Breadcrumbs
-                  crumbs={[
-                    { label: 'Početna', href: '/' },
-                    { label: 'Kontakt' },
-                  ]}
-                />
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                {/* Left — text */}
+                <div>
+                  <div className="mb-6">
+                    <Breadcrumbs
+                      crumbs={[
+                        { label: 'Početna', href: '/' },
+                        { label: 'Kontakt' },
+                      ]}
+                    />
+                  </div>
+                  <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
+                    Kontakt
+                  </span>
+                  <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
+                    Razgovarajmo o vašem{' '}
+                    <span className="text-[#c9a86a]">smještaju</span>
+                  </h1>
+                  <p className="text-[#e8dcc8]/70 text-lg max-w-xl">
+                    Besplatna analiza, bez obveza. Odgovaramo unutar 24 sata —{' '}
+                    emailom, telefonom ili WhatsAppom.
+                  </p>
+                </div>
+
+                {/* Right — aerial Croatia photo */}
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video hidden lg:block">
+                  <Image
+                    src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=900&q=75"
+                    alt="Hrvatska obala — upravljanje smještajem diljem Hrvatske"
+                    fill
+                    sizes="50vw"
+                    className="object-cover"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f2742]/50 to-transparent" />
+                </div>
               </div>
-              <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
-                Kontakt
-              </span>
-              <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
-                Razgovarajmo o vašem{' '}
-                <span className="text-[#c9a86a]">smještaju</span>
-              </h1>
-              <p className="text-[#e8dcc8]/70 text-lg max-w-xl">
-                Besplatna analiza, bez obveza. Odgovaramo unutar 24 sata —{' '}
-                emailom, telefonom ili WhatsAppom.
-              </p>
             </FadeIn>
           </div>
           <div style={{ position: 'relative' }} aria-hidden="true">

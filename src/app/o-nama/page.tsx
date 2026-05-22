@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { BLUR_DATA_URL } from '@/lib/image';
 
 export const metadata: Metadata = {
   title: 'O nama – StayMira | Tko smo i što radimo',
@@ -66,22 +68,19 @@ const team = [
     name: 'Danijelа Colić',
     role: 'Osnivačica & CEO',
     bio: 'Iskustvo u turizmu i property managementu. Posvećena profesionalnoj prezentaciji smještaja i maksimizaciji prihoda za vlasnike diljem Hrvatske.',
-    avatar: 'DC',
-    emoji: '👩‍💼',
+    photoId: 'photo-1580489944761-15a19d654956',
   },
   {
     name: 'Operativni tim',
     role: 'Upravljanje rezervacijama',
     bio: 'Brza komunikacija s gostima, upravljanje kalendarima i cijenama, koordinacija čišćenja i check-inova za sve smještaje u portfoliu.',
-    avatar: 'OT',
-    emoji: '⚙️',
+    photoId: 'photo-1522202176988-66273c2fd55f',
   },
   {
     name: 'Lokalni partneri',
     role: 'Čišćenje & Tehničke usluge',
     bio: 'Provjerena mreža lokalnih partnera za čišćenje, održavanje i tehničke intervencije — brzo i pouzdano, na svim našim lokacijama.',
-    avatar: 'LP',
-    emoji: '🏘️',
+    photoId: 'photo-1542744094-3a31f272c490',
   },
 ];
 
@@ -132,7 +131,7 @@ export default function AboutPage() {
 
         {/* Story */}
         <section className="py-20 bg-[#f4efe6]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <FadeIn>
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
@@ -158,24 +157,48 @@ export default function AboutPage() {
                       princip ostaje isti: vaš smještaj, naša briga.
                     </p>
                   </div>
+
+                  {/* Stats below text */}
+                  <div className="grid grid-cols-2 gap-3 mt-8">
+                    {[
+                      { metric: '100+', label: 'smještaja u upravljanju' },
+                      { metric: '4.9★', label: 'prosječna ocjena gostiju' },
+                      { metric: '5+', label: 'destinacija u HR' },
+                      { metric: '0h', label: 'vlasnikov trud tjedno' },
+                    ].map(({ metric, label }) => (
+                      <div
+                        key={label}
+                        className="bg-white border border-[#e8dcc8] rounded-2xl p-4 text-center"
+                      >
+                        <p className="text-2xl font-black text-[#0f2742]">{metric}</p>
+                        <p className="text-[#0f2742]/50 text-xs mt-1 leading-snug">{label}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { metric: '100+', label: 'smještaja u upravljanju' },
-                    { metric: '4.9★', label: 'prosječna ocjena gostiju' },
-                    { metric: '5+', label: 'destinacija u HR' },
-                    { metric: '0h', label: 'vlasnikov trud tjedno' },
-                  ].map(({ metric, label }) => (
-                    <div
-                      key={label}
-                      className="bg-white border border-[#e8dcc8] rounded-2xl p-5 text-center"
-                    >
-                      <p className="text-2xl font-black text-[#0f2742]">{metric}</p>
-                      <p className="text-[#0f2742]/50 text-xs mt-1 leading-snug">{label}</p>
+                {/* Property photo */}
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=75"
+                    alt="Luksuzna vila s bazenom — StayMira upravljanje smještajem"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                  />
+                  {/* Floating badge */}
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-4 shadow-xl">
+                      <p className="text-xs font-bold uppercase tracking-wider text-[#c9a86a] mb-1">
+                        Rezultat suradnje
+                      </p>
+                      <p className="text-[#0f2742] font-bold text-sm">
+                        Vila Split · +86% prihoda · 4.97★
+                      </p>
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
             </FadeIn>
@@ -230,16 +253,27 @@ export default function AboutPage() {
                 {team.map((member) => (
                   <div
                     key={member.name}
-                    className="bg-white rounded-2xl border border-[#e8dcc8] p-6 text-center"
+                    className="bg-white rounded-2xl border border-[#e8dcc8] overflow-hidden"
                   >
-                    <div className="w-16 h-16 rounded-full bg-[#0f2742] flex items-center justify-center mx-auto mb-4 text-2xl">
-                      <span>{member.emoji}</span>
+                    {/* Photo */}
+                    <div className="relative h-52 overflow-hidden">
+                      <Image
+                        src={`https://images.unsplash.com/${member.photoId}?auto=format&fit=crop&w=400&q=70`}
+                        alt={member.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 33vw"
+                        className="object-cover object-top"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
+                      />
                     </div>
-                    <h3 className="font-bold text-[#0f2742]">{member.name}</h3>
-                    <p className="text-[#c9a86a] text-xs font-semibold uppercase tracking-wider mb-3">
-                      {member.role}
-                    </p>
-                    <p className="text-[#0f2742]/55 text-sm leading-relaxed">{member.bio}</p>
+                    <div className="p-5 text-center">
+                      <h3 className="font-bold text-[#0f2742]">{member.name}</h3>
+                      <p className="text-[#c9a86a] text-xs font-semibold uppercase tracking-wider mb-3">
+                        {member.role}
+                      </p>
+                      <p className="text-[#0f2742]/55 text-sm leading-relaxed">{member.bio}</p>
+                    </div>
                   </div>
                 ))}
               </div>

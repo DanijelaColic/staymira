@@ -3,6 +3,7 @@ export type Destination = {
   name: string;
   region: string;
   emoji: string;
+  photoId: string;
   popular?: boolean;
   fullService?: boolean;
   // SEO
@@ -33,6 +34,7 @@ export const destinations: Destination[] = [
     name: 'Osijek',
     region: 'Slavonija',
     emoji: '🌻',
+    photoId: 'photo-1603400521630-9f2de124b33b',
     fullService: true,
     metaTitle: 'Upravljanje apartmanima Osijek – StayMira | Property Management',
     metaDesc:
@@ -106,6 +108,7 @@ export const destinations: Destination[] = [
     name: 'Split',
     region: 'Dalmacija',
     emoji: '⚓',
+    photoId: 'photo-1555507036-ab1f4038808a',
     popular: true,
     metaTitle: 'Upravljanje apartmanima Split – StayMira | Property Management Dalmacija',
     metaDesc:
@@ -179,6 +182,7 @@ export const destinations: Destination[] = [
     name: 'Zadar',
     region: 'Dalmacija',
     emoji: '🌅',
+    photoId: 'photo-1599484090754-72e3e8ef4213',
     metaTitle: 'Upravljanje apartmanima Zadar – StayMira | Property Management',
     metaDesc:
       'Profesionalno upravljanje apartmanima u Zadru i okolici. Oglašavanje na svim platformama, optimizacija cijena, komunikacija s gostima. Besplatna analiza smještaja.',
@@ -251,6 +255,7 @@ export const destinations: Destination[] = [
     name: 'Dubrovnik',
     region: 'Dalmacija',
     emoji: '🏰',
+    photoId: 'photo-1565717036-0de31c3c4ee9',
     metaTitle: 'Upravljanje apartmanima Dubrovnik – StayMira | Property Management',
     metaDesc:
       'Profesionalno upravljanje apartmanima u Dubrovniku. Premium property management za luksuzne vile i apartmane. Booking, Airbnb, direktne rezervacije.',
@@ -323,6 +328,7 @@ export const destinations: Destination[] = [
     name: 'Istra',
     region: 'Istra i Kvarner',
     emoji: '🫒',
+    photoId: 'photo-1518623489648-a173ef7824f3',
     popular: true,
     metaTitle: 'Upravljanje apartmanima Istra – StayMira | Property Management Istra',
     metaDesc:
@@ -396,6 +402,7 @@ export const destinations: Destination[] = [
     name: 'Zagreb',
     region: 'Kontinentalna Hrvatska',
     emoji: '🏙️',
+    photoId: 'photo-1548954151-3c984e3b42c5',
     metaTitle: 'Upravljanje apartmanima Zagreb – StayMira | Property Management',
     metaDesc:
       'Profesionalno upravljanje apartmanima u Zagrebu. Upravljanje za city break turiste i poslovne goste. Airbnb, Booking, dinamične cijene. Besplatna analiza.',
@@ -468,6 +475,7 @@ export const destinations: Destination[] = [
     name: 'Plitvička jezera',
     region: 'Kontinentalna Hrvatska',
     emoji: '🏞️',
+    photoId: 'photo-1509316785289-025f5b846b35',
     metaTitle: 'Upravljanje smještajem Plitvička jezera – StayMira | Property Management',
     metaDesc:
       'Profesionalno upravljanje apartmanima i kućama uz Plitvička jezera. Upravljanje za UNESCO destinaciju s jakim stranim turizmom. Besplatna analiza.',
@@ -540,6 +548,7 @@ export const destinations: Destination[] = [
     name: 'Kvarner',
     region: 'Istra i Kvarner',
     emoji: '⛵',
+    photoId: 'photo-1507525428034-b723cf961d3e',
     metaTitle: 'Upravljanje apartmanima Kvarner – StayMira | Opatija, Rijeka, Cres, Krk',
     metaDesc:
       'Profesionalno upravljanje smještajem na Kvarneru: Opatija, Rijeka, Cres, Krk, Lošinj, Rab. Upravljanje za nautički i wellness turizam. Besplatna analiza.',

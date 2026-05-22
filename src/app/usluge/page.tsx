@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import { FaqJsonLd } from '@/components/JsonLd';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { BLUR_DATA_URL } from '@/lib/image';
 
 const uslugestFaq = [
   { q: 'Mogu li koristiti samo neke usluge, a ne sve?', a: 'Da, možemo prilagoditi suradnju vašim potrebama. Neki vlasnici žele samo upravljanje cijenama i oglasima, dok drugi prepuštaju sve. Kontaktirajte nas i zajedno dogovorimo što ima smisla za vaš smještaj.' },
@@ -183,48 +185,59 @@ export default function UslugePage() {
       <Header />
       <main>
         {/* Hero */}
-        <section className="pt-32 pb-16 bg-[#0f2742] relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#c9a86a]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#c9a86a]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-          </div>
-
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="pt-32 pb-0 bg-[#0f2742] relative overflow-hidden">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
             <FadeIn>
-              <div className="mb-6">
-                <Breadcrumbs
-                  crumbs={[
-                    { label: 'Početna', href: '/' },
-                    { label: 'Usluge' },
-                  ]}
-                />
-              </div>
-              <div className="max-w-3xl">
-                <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
-                  Što nudimo
-                </span>
-                <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight">
-                  Kompletno upravljanje<br />
-                  <span className="text-[#c9a86a]">kratkoročnim najmom</span>
-                </h1>
-                <p className="text-[#e8dcc8]/70 text-lg leading-relaxed max-w-2xl">
-                  Preuzimamo sve — od postavljanja oglasa i dinamičnih cijena do komunikacije s
-                  gostima, čišćenja i isplate. Vi dobivate prihod, mi vodimo brigu.
-                </p>
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                {/* Left — text */}
+                <div>
+                  <div className="mb-6">
+                    <Breadcrumbs
+                      crumbs={[
+                        { label: 'Početna', href: '/' },
+                        { label: 'Usluge' },
+                      ]}
+                    />
+                  </div>
+                  <span className="inline-block text-[#c9a86a] text-sm font-semibold tracking-widest uppercase mb-4">
+                    Što nudimo
+                  </span>
+                  <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight">
+                    Kompletno upravljanje<br />
+                    <span className="text-[#c9a86a]">kratkoročnim najmom</span>
+                  </h1>
+                  <p className="text-[#e8dcc8]/70 text-lg leading-relaxed">
+                    Preuzimamo sve — od postavljanja oglasa i dinamičnih cijena do komunikacije s
+                    gostima, čišćenja i isplate. Vi dobivate prihod, mi vodimo brigu.
+                  </p>
+                  <div className="flex flex-wrap gap-6 mt-8">
+                    {[
+                      { value: '7', label: 'usluga u paketu' },
+                      { value: '5+', label: 'platformi' },
+                      { value: '0%', label: 'skrivenih naknada' },
+                      { value: '24h', label: 'odgovor gostima' },
+                    ].map(({ value, label }) => (
+                      <div key={label} className="flex items-baseline gap-2">
+                        <span className="text-3xl font-bold text-[#c9a86a]">{value}</span>
+                        <span className="text-[#e8dcc8]/50 text-sm">{label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-                {/* Quick stats */}
-                <div className="flex flex-wrap gap-6 mt-8">
-                  {[
-                    { value: '7', label: 'usluga u paketu' },
-                    { value: '5+', label: 'platformi za oglašavanje' },
-                    { value: '0%', label: 'skrivenih naknada' },
-                    { value: '24h', label: 'odgovor gostima' },
-                  ].map(({ value, label }) => (
-                    <div key={label} className="flex items-baseline gap-2">
-                      <span className="text-3xl font-bold text-[#c9a86a]">{value}</span>
-                      <span className="text-[#e8dcc8]/50 text-sm">{label}</span>
-                    </div>
-                  ))}
+                {/* Right — property photo */}
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] hidden lg:block">
+                  <Image
+                    src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=75"
+                    alt="Profesionalno upravljanje smještajem — StayMira"
+                    fill
+                    sizes="50vw"
+                    className="object-cover"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f2742]/40 to-transparent" />
                 </div>
               </div>
             </FadeIn>

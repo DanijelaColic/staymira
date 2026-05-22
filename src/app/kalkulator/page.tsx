@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Calculator from '@/components/Calculator';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { BLUR_DATA_URL } from '@/lib/image';
 
 export const metadata: Metadata = {
   title: 'Kalkulator prihoda od smještaja – StayMira | Izračunaj zaradu',
@@ -112,21 +114,24 @@ export default function KalkulatorPage() {
 
         {/* Regional benchmark table */}
         <section className="py-20 bg-white">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl mb-10">
-              <span className="text-[#c9a86a] text-xs font-bold uppercase tracking-widest">
-                Tržišni podaci 2026.
-              </span>
-              <h2 className="text-3xl font-bold text-[#0f2742] mt-2 mb-3">
-                Prosječni prihodi po destinaciji
-              </h2>
-              <p className="text-[#0f2742]/60 leading-relaxed">
-                Okvirne godišnje zarade za tipične objekte — s StayMira upravljanjem.
-                Stvarni prihodi variraju prema stanju i lokaciji unutar grada.
-              </p>
-            </div>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left — heading + table */}
+              <div>
+                <div className="mb-8">
+                  <span className="text-[#c9a86a] text-xs font-bold uppercase tracking-widest">
+                    Tržišni podaci 2026.
+                  </span>
+                  <h2 className="text-3xl font-bold text-[#0f2742] mt-2 mb-3">
+                    Prosječni prihodi po destinaciji
+                  </h2>
+                  <p className="text-[#0f2742]/60 leading-relaxed">
+                    Okvirne godišnje zarade za tipične objekte — s StayMira upravljanjem.
+                    Stvarni prihodi variraju prema stanju i lokaciji unutar grada.
+                  </p>
+                </div>
 
-            <div className="overflow-x-auto">
+                <div className="overflow-x-auto">
               <table className="w-full border-collapse text-sm">
                 <thead>
                   <tr className="bg-[#f4efe6]">
@@ -171,10 +176,31 @@ export default function KalkulatorPage() {
               </table>
             </div>
 
-            <p className="mt-4 text-xs text-[#0f2742]/40">
-              * Podaci su procjene temeljene na tržišnim prosjekima za 2025.–2026. godinu.
-              Stvarne vrijednosti mogu biti niže ili više ovisno o specifičnostima objekta.
-            </p>
+                <p className="mt-4 text-xs text-[#0f2742]/40">
+                  * Procjene temeljene na tržišnim prosjekima 2025.–2026. Stvarne vrijednosti variraju.
+                </p>
+              </div>
+
+              {/* Right — photo */}
+              <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[3/4] hidden lg:block">
+                <Image
+                  src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=700&q=75"
+                  alt="Vila s bazenom — Hrvatska obala, kratkoročni najam"
+                  fill
+                  sizes="40vw"
+                  className="object-cover"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f2742]/60 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-4">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#c9a86a]">Primjer iz portfolia</p>
+                    <p className="text-[#0f2742] font-bold text-sm">Vila Split · 91% popunjenost · 52.000 €/god</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
