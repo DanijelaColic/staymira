@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function NewsletterForm() {
+  const router = useRouter();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
@@ -18,6 +20,7 @@ export default function NewsletterForm() {
       });
       if (!res.ok) throw new Error();
       setSubmitted(true);
+      router.push('/newsletter/hvala');
     } catch {
       alert('Greška. Molimo pokušajte ponovo.');
     } finally {

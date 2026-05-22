@@ -15,11 +15,11 @@ const footerLinks = {
     { label: 'Kontakt', href: '/kontakt' },
   ],
   Podrška: [
+    { label: 'Kalkulator prihoda', href: '/kalkulator' },
+    { label: 'Česta pitanja (FAQ)', href: '/faq' },
     { label: 'Besplatna analiza', href: '/#analiza' },
-    { label: 'Česta pitanja', href: '/#faq' },
     { label: 'Politika privatnosti', href: '/privatnost' },
     { label: 'Uvjeti poslovanja', href: '/uvjeti-poslovanja' },
-    { label: 'Osijek (puni servis)', href: '/destinacije/osijek' },
   ],
 };
 

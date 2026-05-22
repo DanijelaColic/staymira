@@ -6,6 +6,7 @@ const navLinks = [
   { label: 'Usluge', href: '/usluge' },
   { label: 'Paketi', href: '/paketi' },
   { label: 'Destinacije', href: '/destinacije' },
+  { label: 'Kalkulator', href: '/kalkulator' },
   { label: 'Blog', href: '/blog' },
   { label: 'Kontakt', href: '/kontakt' },
 ];
