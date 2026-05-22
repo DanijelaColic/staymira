@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Your inbox for new subscriber notifications
-const TO_EMAIL = process.env.CONTACT_EMAIL ?? 'info@staymira.hr';
-
 export async function POST(req: NextRequest) {
+  // Lazy init — avoids build-time crash when env var is missing
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const TO_EMAIL = process.env.CONTACT_EMAIL ?? 'info@staymira.hr';
+
   try {
     const { email } = await req.json();
 

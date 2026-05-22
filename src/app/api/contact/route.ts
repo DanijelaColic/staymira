@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Email adresa na koju stižu upiti — postavite u .env.local
-const TO_EMAIL = process.env.CONTACT_EMAIL ?? 'info@staymira.hr';
-
 export async function POST(req: NextRequest) {
+  // Lazy init — avoids build-time crash when env var is missing
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const TO_EMAIL = process.env.CONTACT_EMAIL ?? 'info@staymira.hr';
+
   try {
     const body = await req.json();
     const { name, email, phone, location, locationOther, propertyType, units, alreadyListed, message } = body;
