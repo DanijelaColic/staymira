@@ -8,6 +8,7 @@ export type Destination = {
   // SEO
   metaTitle: string;
   metaDesc: string;
+  metaKeywords?: string;
   // Hero
   heroTagline: string;
   heroDesc: string;
@@ -36,6 +37,8 @@ export const destinations: Destination[] = [
     metaTitle: 'Upravljanje apartmanima Osijek – StayMira | Property Management',
     metaDesc:
       'Profesionalno upravljanje apartmanima i kućama u Osijeku. Kompletna usluga: oglašavanje, dinamične cijene, čišćenje, komunikacija s gostima. Vlastiti tim na terenu.',
+    metaKeywords:
+      'upravljanje apartmanima Osijek, property management Osijek, kratkoročni najam Osijek, Airbnb Osijek, čišćenje apartmana Osijek, prihod od najma Osijek',
     heroTagline: 'Kompletno upravljanje smještajem u Osijeku',
     heroDesc:
       'Jedini puni servis property managementa u Osijeku — upravljanje rezervacijama, dinamične cijene, vlastiti tim za čišćenje i profesionalna prezentacija. Vi naplaćujete, mi vodimo brigu.',
@@ -107,6 +110,8 @@ export const destinations: Destination[] = [
     metaTitle: 'Upravljanje apartmanima Split – StayMira | Property Management Dalmacija',
     metaDesc:
       'Profesionalno upravljanje apartmanima u Splitu i okolici. Oglašavanje na Booking i Airbnb, dinamične cijene, komunikacija s gostima, fotografije. Besplatna analiza.',
+    metaKeywords:
+      'upravljanje apartmanima Split, property management Split, kratkoročni najam Split, Airbnb Split, Booking Split, upravljanje vilom Dalmacija',
     heroTagline: 'Vaš splitski smještaj u profesionalnim rukama',
     heroDesc:
       'Split je jedan od najtraženijih turističkih gradova Mediterana. Prepustite upravljanje StayMiri i iskoristite puni potencijal svog smještaja — od Dioklecijanove palače do Kaštela i Trogira.',
@@ -177,6 +182,8 @@ export const destinations: Destination[] = [
     metaTitle: 'Upravljanje apartmanima Zadar – StayMira | Property Management',
     metaDesc:
       'Profesionalno upravljanje apartmanima u Zadru i okolici. Oglašavanje na svim platformama, optimizacija cijena, komunikacija s gostima. Besplatna analiza smještaja.',
+    metaKeywords:
+      'upravljanje apartmanima Zadar, property management Zadar, kratkoročni najam Zadar, Airbnb Zadar, upravljanje smještajem dalmatinska zagora, prihod od najma Zadar',
     heroTagline: 'Zadar: sunčani zalasci i puni prihod od najma',
     heroDesc:
       'Zadar je dom najljepšeg zalaska sunca na Mediteranu — i sve traženija destinacija kratkoročnog najma. StayMira preuzima sve: od oglasa do gostiju, dok vi uživate u prihodima.',
@@ -247,6 +254,8 @@ export const destinations: Destination[] = [
     metaTitle: 'Upravljanje apartmanima Dubrovnik – StayMira | Property Management',
     metaDesc:
       'Profesionalno upravljanje apartmanima u Dubrovniku. Premium property management za luksuzne vile i apartmane. Booking, Airbnb, direktne rezervacije.',
+    metaKeywords:
+      'upravljanje apartmanima Dubrovnik, property management Dubrovnik, kratkoročni najam Dubrovnik, upravljanje vilom Dubrovnik, Airbnb Dubrovnik, luksuzni najam Dubrovnik',
     heroTagline: 'Dubrovnik: vrhunski prihod od najma na Jadranu',
     heroDesc:
       'Dubrovnik je najskuplja turistička destinacija u Hrvatskoj — i jedna od najtraženijih na Mediteranu. StayMira vam pomaže izvući maksimum iz tog potencijala kroz premium upravljanje.',
@@ -318,6 +327,8 @@ export const destinations: Destination[] = [
     metaTitle: 'Upravljanje apartmanima Istra – StayMira | Property Management Istra',
     metaDesc:
       'Profesionalno upravljanje apartmanima i vilama u Istri. Poreč, Rovinj, Pula, Novigrad. Oglašavanje, dinamične cijene, komunikacija. Besplatna analiza.',
+    metaKeywords:
+      'upravljanje apartmanima Istra, property management Istra, kratkoročni najam Rovinj, Airbnb Poreč, upravljanje vilom Istra, kratkoročni najam Pula',
     heroTagline: 'Istra: maslinaci, more i maksimalni prihod od najma',
     heroDesc:
       'Istra privlači pretežno austrijske, talijanske i njemačke goste koji cijene mir, gastronomiju i prirodu. StayMira poznaje to tržište i optimizira vaš smještaj za upravo tog gosta.',
@@ -388,6 +399,8 @@ export const destinations: Destination[] = [
     metaTitle: 'Upravljanje apartmanima Zagreb – StayMira | Property Management',
     metaDesc:
       'Profesionalno upravljanje apartmanima u Zagrebu. Upravljanje za city break turiste i poslovne goste. Airbnb, Booking, dinamične cijene. Besplatna analiza.',
+    metaKeywords:
+      'upravljanje apartmanima Zagreb, property management Zagreb, kratkoročni najam Zagreb, Airbnb Zagreb, Booking.com Zagreb, city break smještaj Zagreb',
     heroTagline: 'Zagreb: europska metropola s rastućim kratkoročnim najmom',
     heroDesc:
       'Zagreb privlači poslovne putnike, city break turiste i goste koji prolaze prema Jadranu. Kratkoročni najam u Zagrebu raste — a StayMira pomaže vlasnicima iskoristiti taj potencijal cijele godine.',
@@ -458,6 +471,8 @@ export const destinations: Destination[] = [
     metaTitle: 'Upravljanje smještajem Plitvička jezera – StayMira | Property Management',
     metaDesc:
       'Profesionalno upravljanje apartmanima i kućama uz Plitvička jezera. Upravljanje za UNESCO destinaciju s jakim stranim turizmom. Besplatna analiza.',
+    metaKeywords:
+      'upravljanje smještajem Plitvička jezera, property management Plitvice, kratkoročni najam Plitvička jezera, Airbnb Plitvice, kuća za odmor Plitvice',
     heroTagline: 'Plitvička jezera: UNESCO smještaj s maksimalnim prihodom',
     heroDesc:
       'Smještaj uz Plitvička jezera je jedinstven — traži se cijele godine, gosti dolaze s 5 kontinenata, a StayMira pomaže vlasnicima izvući maksimum iz te rijetke prilike.',
@@ -528,6 +543,8 @@ export const destinations: Destination[] = [
     metaTitle: 'Upravljanje apartmanima Kvarner – StayMira | Opatija, Rijeka, Cres, Krk',
     metaDesc:
       'Profesionalno upravljanje smještajem na Kvarneru: Opatija, Rijeka, Cres, Krk, Lošinj, Rab. Upravljanje za nautički i wellness turizam. Besplatna analiza.',
+    metaKeywords:
+      'upravljanje apartmanima Kvarner, property management Opatija, kratkoročni najam Krk, Airbnb Cres, upravljanje smještajem Lošinj, nautički turizam Kvarner',
     heroTagline: 'Kvarner: nautika, wellness i stabilan prihod od najma',
     heroDesc:
       'Kvarner obuhvaća Opatiju, otoke Cres, Krk, Lošinj i Rab — i sve više postaje destinacija za nautički turizam, wellness goste i dulje boravke. StayMira pomaže vlasnicima na svim tim lokacijama.',

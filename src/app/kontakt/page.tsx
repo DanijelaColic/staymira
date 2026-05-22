@@ -12,10 +12,21 @@ export const metadata: Metadata = {
   title: 'Kontakt – StayMira | Besplatna analiza smještaja',
   description:
     'Kontaktirajte StayMira za besplatnu analizu vašeg smještaja. Odgovaramo unutar 24h. Email, telefon, WhatsApp.',
+  keywords:
+    'kontakt property management, besplatna analiza smještaja, StayMira kontakt, upravljanje apartmanima konzultacija',
+  alternates: {
+    canonical: 'https://staymira.hr/kontakt',
+  },
   openGraph: {
     title: 'Kontakt – StayMira',
     description: 'Besplatna analiza smještaja. Odgovaramo unutar 24h.',
     type: 'website',
+    url: 'https://staymira.hr/kontakt',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Kontakt – StayMira',
+    description: 'Besplatna analiza smještaja. Odgovaramo unutar 24h.',
   },
 };
 

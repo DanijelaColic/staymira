@@ -1,22 +1,34 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { BLUR_DATA_URL } from '@/lib/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FadeIn from '@/components/FadeIn';
 import FloatingUI from '@/components/FloatingUI';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { FaqJsonLd } from '@/components/JsonLd';
+import { FaqJsonLd, CaseStudiesJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Studije slučaja – StayMira | Pravi rezultati vlasnika smještaja',
   description:
     'Pogledajte kako su vlasnici apartmana i vila u Osijeku, Splitu i Zadru ostvarili 30–55% više prihoda uz StayMira upravljanje kratkoročnim najmom.',
+  keywords:
+    'property management rezultati, povećanje prihoda od najma, studija slučaja apartman, StayMira recenzije, upravljanje smještajem primjeri',
+  alternates: {
+    canonical: 'https://staymira.hr/studije-slucaja',
+  },
   openGraph: {
     title: 'Studije slučaja – StayMira',
     description:
       'Pravi rezultati vlasnika apartmana i vila: više prihoda, bolje ocjene, manje stresa.',
     url: 'https://staymira.hr/studije-slucaja',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Studije slučaja – StayMira',
+    description: 'Pravi rezultati: +30–55% prihoda uz profesionalno upravljanje smještajem.',
   },
 };
 
@@ -119,6 +131,16 @@ const faqItems = [
 export default function StudijeSlucajaPage() {
   return (
     <>
+      <CaseStudiesJsonLd
+        reviews={cases.map((c) => ({
+          name: c.name,
+          author: c.owner,
+          location: c.location,
+          reviewBody: c.quote.replace(/^"|"$/g, ''),
+          ratingValue: c.results.after.rating,
+          datePublished: '2026-01-01',
+        }))}
+      />
       <FaqJsonLd items={faqItems} />
       <Header />
       <main>
@@ -200,6 +222,8 @@ export default function StudijeSlucajaPage() {
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 

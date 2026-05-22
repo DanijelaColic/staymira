@@ -8,6 +8,7 @@ import FloatingUI from '@/components/FloatingUI';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { hasBlogContent, getBlogContent, extractToc } from '@/lib/blog';
+import { BLUR_DATA_URL } from '@/lib/image';
 import { BlogPostingJsonLd } from '@/components/JsonLd';
 import { posts } from '../page';
 
@@ -21,9 +22,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = posts.find((p) => p.slug === slug);
   if (!post) return {};
+  const ogImageUrl = `https://staymira.hr/blog/${slug}/opengraph-image`;
   return {
     title: `${post.title} – StayMira Blog`,
     description: post.excerpt,
+    keywords: `${post.tag}, kratkoročni najam, upravljanje smještajem, property management Hrvatska, StayMira blog`,
+    alternates: {
+      canonical: `https://staymira.hr/blog/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -31,6 +37,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.date,
       authors: [post.author],
       tags: [post.tag],
+      url: `https://staymira.hr/blog/${slug}`,
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [ogImageUrl],
     },
   };
 }
@@ -43,6 +57,9 @@ export default async function BlogPostPage({ params }: Props) {
   // Extract TOC from MDX content
   const rawContent = getBlogContent(slug);
   const tocItems = rawContent ? extractToc(rawContent) : [];
+  const wordCount = rawContent
+    ? rawContent.replace(/```[\s\S]*?```/g, '').split(/\s+/).filter(Boolean).length
+    : undefined;
 
   // Related posts = same tag, exclude current
   // Dynamically import MDX content if available
@@ -71,6 +88,8 @@ export default async function BlogPostPage({ params }: Props) {
         excerpt={post.excerpt}
         author={post.author}
         datePublished={post.date}
+        photoId={post.photoId}
+        wordCount={wordCount}
       />
       <ReadingProgress />
       <Header />
@@ -128,6 +147,8 @@ export default async function BlogPostPage({ params }: Props) {
                     priority
                     sizes="(max-width: 768px) 100vw, 800px"
                     className="object-cover"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   <span className="absolute bottom-4 left-4 text-3xl">{post.emoji}</span>
@@ -258,6 +279,8 @@ export default async function BlogPostPage({ params }: Props) {
                         fill
                         sizes="48px"
                         className="object-cover"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
                       />
                     </div>
                     <div>

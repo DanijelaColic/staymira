@@ -20,11 +20,22 @@ export const metadata: Metadata = {
   title: 'Usluge – StayMira | Profesionalno upravljanje smještajem',
   description:
     'Kompletno upravljanje kratkoročnim najmom: oglašavanje, dinamične cijene, komunikacija s gostima, čišćenje, fotografije i booking web stranica.',
+  keywords:
+    'upravljanje apartmanima, property management Hrvatska, kratkoročni najam usluge, dinamično upravljanje cijenama, čišćenje apartmana, booking web stranica, višekanalno oglašavanje',
+  alternates: {
+    canonical: 'https://staymira.hr/usluge',
+  },
   openGraph: {
     title: 'Usluge – StayMira',
     description:
       'Sve što trebate za uspješan kratkoročni najam — od oglašavanja do čišćenja i izvještaja.',
     type: 'website',
+    url: 'https://staymira.hr/usluge',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Usluge upravljanja smještajem – StayMira',
+    description: 'Kompletno upravljanje kratkoročnim najmom u Hrvatskoj.',
   },
 };
 

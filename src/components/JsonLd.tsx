@@ -83,15 +83,28 @@ type BlogPostingProps = {
   excerpt: string;
   author: string;
   datePublished: string;
+  photoId?: string;
+  wordCount?: number;
 };
 
-export function BlogPostingJsonLd({ slug, title, excerpt, author, datePublished }: BlogPostingProps) {
+export function BlogPostingJsonLd({
+  slug,
+  title,
+  excerpt,
+  author,
+  datePublished,
+  photoId,
+  wordCount,
+}: BlogPostingProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: title,
     description: excerpt,
     url: `https://staymira.hr/blog/${slug}`,
+    image: photoId
+      ? `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=1200&q=80`
+      : `https://staymira.hr/blog/${slug}/opengraph-image`,
     author: {
       '@type': 'Organization',
       name: author,
@@ -107,6 +120,7 @@ export function BlogPostingJsonLd({ slug, title, excerpt, author, datePublished 
     },
     datePublished,
     dateModified: datePublished,
+    ...(wordCount ? { wordCount } : {}),
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `https://staymira.hr/blog/${slug}`,
@@ -118,6 +132,63 @@ export function BlogPostingJsonLd({ slug, title, excerpt, author, datePublished 
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// ── CaseStudy / ItemList + Reviews schema for /studije-slucaja ────────────
+type CaseStudyReview = {
+  name: string;
+  author: string;
+  location: string;
+  reviewBody: string;
+  ratingValue: number;
+  datePublished?: string;
+};
+
+export function CaseStudiesJsonLd({ reviews }: { reviews: CaseStudyReview[] }) {
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Studije slučaja – StayMira',
+    description: 'Primjeri uspješnog upravljanja kratkoročnim smještajem u Hrvatskoj',
+    url: 'https://staymira.hr/studije-slucaja',
+    numberOfItems: reviews.length,
+    itemListElement: reviews.map((r, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Review',
+        name: r.name,
+        reviewBody: r.reviewBody,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: r.ratingValue,
+          bestRating: 5,
+          worstRating: 1,
+        },
+        author: {
+          '@type': 'Person',
+          name: r.author,
+        },
+        locationCreated: {
+          '@type': 'Place',
+          name: r.location,
+        },
+        itemReviewed: {
+          '@type': 'LocalBusiness',
+          name: 'StayMira',
+          url: 'https://staymira.hr',
+        },
+        ...(r.datePublished ? { datePublished: r.datePublished } : {}),
+      },
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
     />
   );
 }

@@ -24,16 +24,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { grad } = await params;
   const dest = getDestination(grad);
   if (!dest) return {};
+  const ogImageUrl = `https://staymira.hr/destinacije/${dest.slug}/opengraph-image`;
   return {
     title: dest.metaTitle,
     description: dest.metaDesc,
+    ...(dest.metaKeywords ? { keywords: dest.metaKeywords } : {}),
+    alternates: {
+      canonical: `https://staymira.hr/destinacije/${dest.slug}`,
+    },
     openGraph: {
       title: dest.metaTitle,
       description: dest.metaDesc,
       type: 'website',
+      url: `https://staymira.hr/destinacije/${dest.slug}`,
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: dest.name }],
     },
-    alternates: {
-      canonical: `https://staymira.hr/destinacije/${dest.slug}`,
+    twitter: {
+      card: 'summary_large_image',
+      title: dest.metaTitle,
+      description: dest.metaDesc,
+      images: [ogImageUrl],
     },
   };
 }

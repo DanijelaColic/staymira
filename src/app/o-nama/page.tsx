@@ -9,6 +9,23 @@ export const metadata: Metadata = {
   title: 'O nama – StayMira | Tko smo i što radimo',
   description:
     'Upoznajte tim iza StayMira. Profesionalno upravljanje smještajem s osobnim pristupom, lokalnim znanjem i transparentnim uvjetima.',
+  keywords:
+    'StayMira tim, property management agencija Hrvatska, upravljanje smještajem tko smo, kratkoročni najam agencija',
+  alternates: {
+    canonical: 'https://staymira.hr/o-nama',
+  },
+  openGraph: {
+    title: 'O nama – StayMira',
+    description:
+      'Upoznajte tim iza StayMira. Profesionalno upravljanje smještajem s osobnim pristupom.',
+    type: 'website',
+    url: 'https://staymira.hr/o-nama',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'O nama – StayMira',
+    description: 'Profesionalno upravljanje smještajem s osobnim pristupom i lokalnim znanjem.',
+  },
 };
 
 const values = [

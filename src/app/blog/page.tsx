@@ -10,6 +10,22 @@ export const metadata: Metadata = {
   title: 'Blog – StayMira | Savjeti za vlasnike smještaja',
   description:
     'Praktični savjeti za vlasnike apartmana, vila i kuća za odmor. Kako povećati prihod, optimizirati cijene i upravljati recenzijama.',
+  keywords:
+    'savjeti kratkoročni najam, upravljanje apartmanima blog, povećanje prihoda od apartmana, Airbnb savjeti Hrvatska, property management vodič',
+  alternates: {
+    canonical: 'https://staymira.hr/blog',
+  },
+  openGraph: {
+    title: 'Blog – StayMira | Savjeti za vlasnike smještaja',
+    description: 'Praktični vodič za vlasnike apartmana koji žele zaraditi više.',
+    type: 'website',
+    url: 'https://staymira.hr/blog',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog – StayMira',
+    description: 'Savjeti za vlasnike apartmana, vila i kuća za odmor.',
+  },
 };
 
 export type BlogPost = {

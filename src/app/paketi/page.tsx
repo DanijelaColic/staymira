@@ -11,13 +11,20 @@ export const metadata: Metadata = {
   title: 'Paketi i cijene – StayMira | Transparentno upravljanje smještajem',
   description:
     'Transparentni paketi za upravljanje smještajem: Starter (18%), Standard (22%), Premium (26%). Bez fiksnih naknada — plaćate samo postotak od ostvarenog prihoda.',
+  keywords:
+    'cijene property management Hrvatska, koliko košta upravljanje apartmanom, property management provizija, paketi kratkoročni najam',
+  alternates: { canonical: 'https://staymira.hr/paketi' },
   openGraph: {
     title: 'Paketi i cijene – StayMira',
-    description:
-      'Bez fiksnih troškova. Plaćate postotak od prihoda. Zarađujemo zajedno.',
+    description: 'Bez fiksnih troškova. Plaćate postotak od prihoda. Zarađujemo zajedno.',
     type: 'website',
+    url: 'https://staymira.hr/paketi',
   },
-  alternates: { canonical: 'https://staymira.hr/paketi' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Paketi i cijene – StayMira',
+    description: 'Transparentni paketi upravljanja smještajem bez fiksnih troškova.',
+  },
 };
 
 type Plan = {
