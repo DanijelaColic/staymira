@@ -1,32 +1,8 @@
-const posts = [
-  {
-    tag: 'Strategija',
-    readTime: '5 min čitanja',
-    title: 'Kako povećati prihod od apartmana bez spuštanja cijene',
-    excerpt:
-      'Mnogi vlasnici misle da jedini način za više rezervacija jest niža cijena. U stvarnosti, ključ je u optimizaciji oglasa, prezentaciji i dinamičnoj cjenovnoj strategiji.',
-    emoji: '📈',
-    date: '15. svibnja 2026.',
-  },
-  {
-    tag: 'Platforme',
-    readTime: '7 min čitanja',
-    title: 'Booking.com ili Airbnb: gdje se više isplati oglašavati?',
-    excerpt:
-      'Oba kanala imaju prednosti — Booking donosi veći volumen rezervacija, Airbnb bolji profil gosta. Saznajte koja kombinacija odgovara vašem tipu smještaja.',
-    emoji: '⚖️',
-    date: '3. svibnja 2026.',
-  },
-  {
-    tag: 'Savjeti',
-    readTime: '6 min čitanja',
-    title: 'Što vlasnici najčešće griješe kod kratkoročnog najma',
-    excerpt:
-      'Od loših fotografija i nestandardnih opisa do nefleksibilnih uvjeta otkazivanja — ove pogreške koštaju vas rezervacija i novca, a lako ih je ispraviti.',
-    emoji: '🔍',
-    date: '22. travnja 2026.',
-  },
-];
+import Link from 'next/link';
+import { posts } from '@/app/blog/page';
+
+// Show 3 most recent posts on homepage
+const previewPosts = posts.slice(0, 3);
 
 export default function BlogPreview() {
   return (
@@ -42,25 +18,26 @@ export default function BlogPreview() {
               Savjeti za vlasnike
             </h2>
           </div>
-          <a
-            href="#blog"
+          <Link
+            href="/blog"
             className="inline-flex items-center gap-1.5 text-[#0f2742] text-sm font-medium hover:text-[#c9a86a] transition-colors group"
           >
-            Svi članci
+            Svi članci ({posts.length})
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="group-hover:translate-x-0.5 transition-transform">
               <path d="M2 7h10M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </a>
+          </Link>
         </div>
 
         {/* Post cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <article
-              key={post.title}
-              className="group flex flex-col rounded-2xl border border-[#e8dcc8] overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+          {previewPosts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group flex flex-col rounded-2xl border border-[#e8dcc8] overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
-              {/* Placeholder image */}
+              {/* Image */}
               <div className="h-44 bg-gradient-to-br from-[#0f2742] to-[#1a3a5c] flex items-center justify-center">
                 <span className="text-5xl opacity-60">{post.emoji}</span>
               </div>
@@ -71,7 +48,7 @@ export default function BlogPreview() {
                   <span className="text-xs font-semibold text-[#c9a86a] bg-[#c9a86a]/10 px-2.5 py-1 rounded-full">
                     {post.tag}
                   </span>
-                  <span className="text-xs text-[#0f2742]/40">{post.readTime}</span>
+                  <span className="text-xs text-[#0f2742]/40">{post.readTime} čitanja</span>
                 </div>
 
                 <h3 className="font-bold text-[#0f2742] text-base leading-snug group-hover:text-[#c9a86a] transition-colors">
@@ -92,8 +69,18 @@ export default function BlogPreview() {
                   </span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
+        </div>
+
+        {/* CTA row */}
+        <div className="mt-10 text-center">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 border border-[#e8dcc8] hover:border-[#c9a86a]/40 text-[#0f2742] hover:text-[#c9a86a] text-sm font-semibold px-6 py-3 rounded-full transition-all duration-200"
+          >
+            Pogledaj svih {posts.length} članaka →
+          </Link>
         </div>
       </div>
     </section>

@@ -17,8 +17,8 @@ const footerLinks = {
     { label: 'Besplatna analiza', href: '/#analiza' },
     { label: 'Česta pitanja', href: '/#faq' },
     { label: 'Politika privatnosti', href: '/privatnost' },
+    { label: 'Uvjeti poslovanja', href: '/uvjeti-poslovanja' },
     { label: 'Osijek (puni servis)', href: '/destinacije/osijek' },
-    { label: 'Split', href: '/destinacije/split' },
   ],
 };
 
